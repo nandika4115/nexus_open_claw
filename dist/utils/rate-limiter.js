@@ -1,0 +1,15 @@
+export class RateLimiter {
+    minIntervalMs;
+    lastRun = 0;
+    constructor(minIntervalMs) {
+        this.minIntervalMs = minIntervalMs;
+    }
+    async schedule() {
+        const now = Date.now();
+        const wait = Math.max(0, this.minIntervalMs - (now - this.lastRun));
+        if (wait > 0) {
+            await new Promise((resolve) => setTimeout(resolve, wait));
+        }
+        this.lastRun = Date.now();
+    }
+}
