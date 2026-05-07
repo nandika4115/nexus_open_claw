@@ -30,7 +30,7 @@ export class ConnectionStore {
       const updated: ConnectionsFile = {
         connections: [...current.connections, connection]
       };
-      await this.save(updated);
+      await writeYamlFile(this.connectionsPath, updated);
       this.logger.info("Connection added", { connectionId: connection.id });
     });
   }

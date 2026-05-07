@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>NEXUS</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <div class="shell">
+      <aside class="sidebar">
+        <div class="brand">
+          <div class="mark">NX</div>
+          <div>
+            <h1>NEXUS</h1>
+            <p>Research continuity console</p>
+          </div>
+        </div>
+
+        <button class="primary" id="run-lit-watch">Run lit watch</button>
+
+        <section class="side-section">
+          <div class="section-label">Threads</div>
+          <div id="thread-list" class="thread-list"></div>
+        </section>
+      </aside>
+
+      <main class="main">
+        <header class="topbar">
+          <div>
+            <h2 id="page-title">Workspace</h2>
+            <p id="page-subtitle">Create a research thread, watch sources, and inspect browser context.</p>
+          </div>
+          <div class="status-grid" id="status-grid"></div>
+        </header>
+
+        <section class="workspace">
+          <div class="panel create-panel">
+            <div class="panel-head">
+              <h3>New Research Thread</h3>
+            </div>
+            <form id="thread-form">
+              <label>
+                Title
+                <input name="title" placeholder="Retrieval Augmented Generation Evaluation" required />
+              </label>
+              <label>
+                Keywords
+                <textarea name="topic_keywords" rows="3" placeholder="rag evaluation, hallucination reduction, retrieval"></textarea>
+              </label>
+              <div class="form-row">
+                <label>
+                  Priority
+                  <select name="priority">
+                    <option value="medium">Medium</option>
+                    <option value="high">High</option>
+                    <option value="low">Low</option>
+                  </select>
+                </label>
+                <fieldset>
+                  <legend>Watch</legend>
+                  <label class="check"><input type="checkbox" name="watch_sources" value="core" checked /> CORE</label>
+                  <label class="check"><input type="checkbox" name="watch_sources" value="arxiv" /> arXiv</label>
+                  <label class="check"><input type="checkbox" name="watch_sources" value="semantic_scholar" /> Semantic Scholar</label>
+                </fieldset>
+              </div>
+              <button type="submit">Create thread</button>
+            </form>
+          </div>
+
+          <div class="panel detail-panel">
+            <div class="panel-head">
+              <h3 id="thread-title">Select a thread</h3>
+              <span id="thread-meta"></span>
+            </div>
+            <div id="thread-detail" class="empty-state">
+              Pick a thread from the sidebar or create one to begin.
+            </div>
+          </div>
+        </section>
+
+        <section class="panel browser-panel">
+          <div class="panel-head">
+            <h3>Browser Context</h3>
+            <div class="panel-actions">
+              <button id="import-tabs" class="secondary">Save tabs to thread</button>
+              <button id="refresh-tabs" class="secondary">Refresh</button>
+            </div>
+          </div>
+          <div id="browser-tabs" class="tabs-grid"></div>
+        </section>
+      </main>
+    </div>
+
+    <div id="toast" class="toast" hidden></div>
+    <script src="/app.js" type="module"></script>
+  </body>
+</html>

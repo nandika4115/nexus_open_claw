@@ -3,6 +3,17 @@ const TAB_STATE = new Map();
 const HISTORY = [];
 let activeTabId = null;
 let activeSince = Date.now();
+let pushTimer = null;
+
+chrome.runtime.onInstalled.addListener(() => {
+  void hydrateTabs();
+});
+
+chrome.runtime.onStartup.addListener(() => {
+  void hydrateTabs();
+});
+
+hydrateTabs();
 
 function recordTabTime(tabId) {
   if (activeTabId === null) {
@@ -22,20 +33,36 @@ chrome.tabs.onActivated.addListener(async (info) => {
   recordTabTime(info.tabId);
   const tab = await chrome.tabs.get(info.tabId);
   updateTabState(tab);
+  schedulePush();
 });
 
 chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
   if (changeInfo.status === "complete") {
     updateTabState(tab);
+    schedulePush();
   }
 });
 
-chrome.runtime.onMessage.addListener((message, _sender, _sendResponse) => {
+chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   if (message?.type === "progress") {
-    const state = TAB_STATE.get(message.tabId);
+    const tabId = sender.tab?.id ?? message.tabId;
+    const state = TAB_STATE.get(tabId);
     if (state) {
       state.readingProgress = message.progress;
+      schedulePush();
     }
+  }
+  if (message?.type === "sync_now") {
+    pushSnapshot().then(() => sendResponse({ ok: true }));
+    return true;
+  }
+  if (message?.type === "status") {
+    sendResponse({
+      tabCount: TAB_STATE.size,
+      activeTabId,
+      apiBase: API_BASE
+    });
+    return true;
   }
 });
 
@@ -64,6 +91,31 @@ function updateTabState(tab) {
   existing.windowActive = tab.active;
   existing.tabIndex = tab.index;
   TAB_STATE.set(tab.id, existing);
+}
+
+async function hydrateTabs() {
+  try {
+    const tabs = await chrome.tabs.query({});
+    for (const tab of tabs) {
+      updateTabState(tab);
+      if (tab.active) {
+        activeTabId = tab.id;
+      }
+    }
+    schedulePush(250);
+  } catch {
+    // Browser may not be ready yet.
+  }
+}
+
+function schedulePush(delayMs = 1500) {
+  if (pushTimer) {
+    clearTimeout(pushTimer);
+  }
+  pushTimer = setTimeout(() => {
+    pushTimer = null;
+    void pushSnapshot();
+  }, delayMs);
 }
 
 async function pushSnapshot() {

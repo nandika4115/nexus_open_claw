@@ -2,7 +2,7 @@ import { z } from "zod";
 
 export const ThreadStatusSchema = z.enum(["active", "dormant", "archived"]);
 export const ThreadPrioritySchema = z.enum(["high", "medium", "low"]);
-export const WatchSourceSchema = z.enum(["arxiv", "semantic_scholar"]);
+export const WatchSourceSchema = z.enum(["arxiv", "core", "semantic_scholar"]);
 
 export const ThreadSchema = z.object({
   id: z.string(),

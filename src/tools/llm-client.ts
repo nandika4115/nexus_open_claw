@@ -8,10 +8,10 @@ import type { Logger } from "winston";
 import { requestWithRetry } from "../utils/http-client.js";
 
 export interface LlmConfig {
-  primary: "claude" | "openai" | "local";
-  fallback: "claude" | "openai" | "local";
+  primary: "claude" | "gemini" | "local";
+  fallback: "claude" | "gemini" | "local";
   anthropicApiKey?: string;
-  openaiApiKey?: string;
+  geminiApiKey?: string;
   maxContextTokens: number;
   maxOutputTokens: number;
   temperature: number;
@@ -28,7 +28,7 @@ export class LlmClient {
   private readonly config: LlmConfig;
   private readonly logger: Logger;
   private readonly anthropic?: Anthropic;
-  private readonly openai?: OpenAI;
+  private readonly gemini?: OpenAI;
 
   constructor(config: LlmConfig, logger: Logger) {
     this.config = config;
@@ -36,8 +36,8 @@ export class LlmClient {
     if (config.anthropicApiKey) {
       this.anthropic = new Anthropic({ apiKey: config.anthropicApiKey });
     }
-    if (config.openaiApiKey) {
-      this.openai = new OpenAI({ apiKey: config.openaiApiKey });
+    if (config.geminiApiKey) {
+      this.gemini = new OpenAI({ apiKey: config.geminiApiKey });
     }
   }
 
@@ -72,11 +72,11 @@ export class LlmClient {
       return message.text;
     }
 
-    if (provider === "openai") {
-      if (!this.openai) {
-        throw new Error("OpenAI API key not configured");
+    if (provider === "gemini") {
+      if (!this.gemini) {
+        throw new Error("Gemini API key not configured");
       }
-      const response = await this.openai.chat.completions.create({
+      const response = await this.gemini.chat.completions.create({
         model: "gpt-4o",
         max_tokens: this.config.maxOutputTokens,
         temperature: this.config.temperature,

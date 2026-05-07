@@ -6,10 +6,12 @@ import type { BrowserExtensionClient } from "../tools/browser-extension.js";
 import type { ClipboardMonitor } from "../tools/clipboard-monitor.js";
 import type { FileWatcher } from "../tools/file-watcher.js";
 import type { ArxivClient } from "../tools/arxiv-client.js";
+import type { CoreClient } from "../tools/core-client.js";
 import type { SemanticScholarClient } from "../tools/semantic-scholar.js";
 import type { LlmClient } from "../tools/llm-client.js";
 import type { NotionClient } from "../tools/notion-client.js";
 import type { ObsidianClient } from "../tools/obsidian-client.js";
+import type { OpenClawCli } from "../tools/openclaw-cli.js";
 import type { DesktopNotifier } from "../channels/desktop-notify.js";
 import type { SlackChannel } from "../channels/slack.js";
 import type { IMessageChannel } from "../channels/imessage.js";
@@ -22,8 +24,10 @@ export interface SkillTools {
   fileWatcher?: FileWatcher;
   clipboard?: ClipboardMonitor;
   arxiv?: ArxivClient;
+  core?: CoreClient;
   semanticScholar?: SemanticScholarClient;
   llm?: LlmClient;
+  openclaw?: OpenClawCli;
   notion?: NotionClient;
   obsidian?: ObsidianClient;
 }

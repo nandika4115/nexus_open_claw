@@ -12,6 +12,7 @@ import { GatewayRouter } from "./router.js";
 export interface GatewayServerConfig {
   port: number;
   apiKey?: string;
+  configureApp?: (app: express.Express) => void;
 }
 
 export class GatewayServer {
@@ -29,9 +30,12 @@ export class GatewayServer {
 
   start(): void {
     const app = express();
+    app.use(express.json({ limit: "2mb" }));
+
     app.get("/health", (_req: Request, res: Response) => {
       res.json({ ok: true });
     });
+    this.config.configureApp?.(app);
 
     this.server = http.createServer(app);
     this.wss = new WebSocketServer({ noServer: true });

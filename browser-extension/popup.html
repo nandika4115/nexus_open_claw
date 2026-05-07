@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>NEXUS Bridge</title>
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body>
+    <main>
+      <header>
+        <div class="mark">NX</div>
+        <div>
+          <h1>NEXUS Bridge</h1>
+          <p id="status">Checking connection...</p>
+        </div>
+      </header>
+
+      <section>
+        <div class="metric">
+          <strong id="tab-count">0</strong>
+          <span>tracked tabs</span>
+        </div>
+        <div class="metric">
+          <strong id="api-state">...</strong>
+          <span>local bridge</span>
+        </div>
+      </section>
+
+      <button id="sync-now">Sync now</button>
+      <a href="http://localhost:8080" target="_blank" rel="noreferrer">Open dashboard</a>
+    </main>
+    <script src="popup.js" type="module"></script>
+  </body>
+</html>

@@ -9,6 +9,18 @@ let cached = { tabs: [], history: [], lastUpdated: null };
 
 app.use(express.json({ limit: "2mb" }));
 
+try {
+  const raw = await fs.readFile(statePath, "utf8");
+  const parsed = JSON.parse(raw);
+  cached = {
+    tabs: Array.isArray(parsed.tabs) ? parsed.tabs : [],
+    history: Array.isArray(parsed.history) ? parsed.history : [],
+    lastUpdated: parsed.lastUpdated ?? null
+  };
+} catch {
+  cached = { tabs: [], history: [], lastUpdated: null };
+}
+
 app.post("/ingest", async (req, res) => {
   const { tabs, history, timestamp } = req.body ?? {};
   cached = {
@@ -22,6 +34,15 @@ app.post("/ingest", async (req, res) => {
 
 app.get("/tabs", (_req, res) => {
   res.json(cached.tabs);
+});
+
+app.get("/status", (_req, res) => {
+  res.json({
+    ok: true,
+    tabCount: cached.tabs.length,
+    historyCount: cached.history.length,
+    lastUpdated: cached.lastUpdated
+  });
 });
 
 app.get("/history", (req, res) => {

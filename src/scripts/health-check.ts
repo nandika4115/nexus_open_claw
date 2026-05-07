@@ -1,14 +1,30 @@
 import { loadConfig } from "../config/index.js";
+import { OpenClawCli } from "../tools/openclaw-cli.js";
 
 async function main(): Promise<void> {
   const config = await loadConfig();
   const checks: Array<{ label: string; ok: boolean }> = [];
+  const openclaw = new OpenClawCli({ command: config.env.OPENCLAW_CLI_PATH });
+
+  try {
+    const version = await openclaw.version();
+    checks.push({ label: "OpenClaw CLI", ok: version.ok });
+  } catch {
+    checks.push({ label: "OpenClaw CLI", ok: false });
+  }
+
+  try {
+    const health = await openclaw.health();
+    checks.push({ label: "OpenClaw gateway", ok: health.ok });
+  } catch {
+    checks.push({ label: "OpenClaw gateway", ok: false });
+  }
 
   try {
     const response = await fetch("http://localhost:8080/health");
-    checks.push({ label: "OpenClaw gateway", ok: response.ok });
+    checks.push({ label: "NEXUS gateway", ok: response.ok });
   } catch {
-    checks.push({ label: "OpenClaw gateway", ok: false });
+    checks.push({ label: "NEXUS gateway", ok: false });
   }
 
   try {

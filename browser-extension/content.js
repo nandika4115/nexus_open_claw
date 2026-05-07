@@ -11,7 +11,6 @@ function sendProgress() {
   const progress = computeProgress();
   chrome.runtime.sendMessage({
     type: "progress",
-    tabId: null,
     progress
   });
 }

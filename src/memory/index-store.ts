@@ -36,7 +36,7 @@ export class IndexStore {
       if (!threads.find((item) => item.id === thread.id)) {
         threads.push(thread);
       }
-      await this.save({ ...index, threads });
+      await writeYamlFile(this.indexPath, { ...index, threads, last_updated: toIsoTimestamp() });
       this.logger.info("Index thread updated", { threadId: thread.id });
     });
   }

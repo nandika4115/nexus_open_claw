@@ -10,6 +10,7 @@ export class ClipboardMonitor {
   private timer?: NodeJS.Timeout;
   private readonly entries: ClipboardEntry[] = [];
   private lastContent = "";
+  private disabled = false;
 
   constructor(pollIntervalMs = 10000) {
     this.pollIntervalMs = pollIntervalMs;
@@ -39,7 +40,18 @@ export class ClipboardMonitor {
   }
 
   private async poll(): Promise<void> {
-    const content = await clipboardy.read();
+    if (this.disabled) {
+      return;
+    }
+
+    let content: string;
+    try {
+      content = await clipboardy.read();
+    } catch {
+      this.disabled = true;
+      return;
+    }
+
     if (content.length < 50) {
       return;
     }

@@ -12,7 +12,7 @@ export function createLitWatchBehavior(services: SkillServices): PlannedBehavior
     name: "lit_watch",
     handler: async () => {
       const { memory, tools, logger, config } = services;
-      if (!tools.arxiv && !tools.semanticScholar) {
+      if (!tools.arxiv && !tools.core && !tools.semanticScholar) {
         logger.warn("Lit watch skipped: tools not configured");
         return;
       }
@@ -25,26 +25,63 @@ export function createLitWatchBehavior(services: SkillServices): PlannedBehavior
         const results: Array<{ title: string; abstract?: string; url: string; authors: string[] }> = [];
 
         if (tools.arxiv && thread.watch_sources.includes("arxiv")) {
-          const arxivResults = await tools.arxiv.searchByKeywords(thread.topic_keywords, 10);
-          for (const result of arxivResults) {
-            results.push({
-              title: result.title,
-              abstract: result.summary,
-              url: result.id,
-              authors: result.authors
+          try {
+            const arxivResults = await tools.arxiv.searchByKeywords(thread.topic_keywords, 10);
+            for (const result of arxivResults) {
+              results.push({
+                title: result.title,
+                abstract: result.summary,
+                url: result.id,
+                authors: result.authors
+              });
+            }
+          } catch (error) {
+            logger.warn("Lit watch provider failed", {
+              thread: thread.slug,
+              provider: "arxiv",
+              error: (error as Error).message
+            });
+          }
+        }
+
+        if (tools.core && thread.watch_sources.includes("core")) {
+          try {
+            const query = thread.topic_keywords.join(" ");
+            const coreResults = await tools.core.search(query, 10);
+            for (const result of coreResults) {
+              results.push({
+                title: result.title,
+                abstract: result.abstract,
+                url: result.url,
+                authors: result.authors
+              });
+            }
+          } catch (error) {
+            logger.warn("Lit watch provider failed", {
+              thread: thread.slug,
+              provider: "core",
+              error: (error as Error).message
             });
           }
         }
 
         if (tools.semanticScholar && thread.watch_sources.includes("semantic_scholar")) {
-          const query = thread.topic_keywords.join(" ");
-          const scholarResults = await tools.semanticScholar.search(query, 10);
-          for (const result of scholarResults) {
-            results.push({
-              title: result.title,
-              abstract: result.abstract,
-              url: `https://www.semanticscholar.org/paper/${result.id}`,
-              authors: result.authors
+          try {
+            const query = thread.topic_keywords.join(" ");
+            const scholarResults = await tools.semanticScholar.search(query, 10);
+            for (const result of scholarResults) {
+              results.push({
+                title: result.title,
+                abstract: result.abstract,
+                url: `https://www.semanticscholar.org/paper/${result.id}`,
+                authors: result.authors
+              });
+            }
+          } catch (error) {
+            logger.warn("Lit watch provider failed", {
+              thread: thread.slug,
+              provider: "semantic_scholar",
+              error: (error as Error).message
             });
           }
         }
@@ -68,7 +105,7 @@ export function createLitWatchBehavior(services: SkillServices): PlannedBehavior
                   contextChunks: [result.abstract ?? ""]
                 }))
               )
-            : 0.5;
+            : threshold;
 
           if (Number.isNaN(relevanceScore) || relevanceScore < threshold) {
             continue;
@@ -90,6 +127,11 @@ export function createLitWatchBehavior(services: SkillServices): PlannedBehavior
         if (newSources.length > 0) {
           sources.sources.push(...newSources);
           await memory.threads.writeSources(thread.slug, sources);
+          await memory.index.updateThread({
+            ...thread,
+            source_count: sources.sources.length,
+            last_touched: toIsoTimestamp()
+          });
         }
 
         const watchPath = path.join(

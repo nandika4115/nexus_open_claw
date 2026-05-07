@@ -2,7 +2,7 @@
 
 > **"Your research never forgets. Neither should you."**
 
-NEXUS is a persistent, proactive research cognition layer built on the **OpenClaw autonomous AI agent framework**. It lives alongside a researcher's workflow — silently capturing, connecting, and resurfacing intellectual context across time, tools, and sessions. It does not wait to be asked; it thinks *with* the user.
+NEXUS is a persistent, proactive research cognition layer built on the **OpenClaw autonomous AI agent framework**. It lives alongside a researcher's workflow — silently capturing, connecting, and resurfacing intellectual context across time, tools, and sessions. It does not wait to be asked; it thinks _with_ the user.
 
 This README is the single source of truth for any CLI agent, developer, or automated system tasked with building, extending, or deploying NEXUS. Every design decision, data contract, file structure, API dependency, agent behavior, and build instruction is documented here.
 
@@ -37,36 +37,36 @@ This README is the single source of truth for any CLI agent, developer, or autom
 
 ## 1. Hackathon Context
 
-| Field              | Detail                                                  |
-|--------------------|---------------------------------------------------------|
-| Hackathon Name     | **CLASH OF THE CLAWS — The OpenClaw Hackathon**         |
-| Organized by       | Tech Management, SRI-B (Samsung R&D Institute)          |
-| Duration           | 20th April – 20th May 2026                              |
-| Prize Pool         | ₹80,000                                                 |
-| Theme Selected     | **Theme 3: Productivity Platforms**                     |
-| Framework          | OpenClaw (formerly Clawdbot → Moltbot)                  |
-| GitHub Stars       | 247K+ as of March 2026                                  |
-| Governance         | OpenClaw Foundation (post-founder Peter Steinberger)    |
+| Field          | Detail                                               |
+| -------------- | ---------------------------------------------------- |
+| Hackathon Name | **CLASH OF THE CLAWS — The OpenClaw Hackathon**      |
+| Organized by   | Tech Management, SRI-B (Samsung R&D Institute)       |
+| Duration       | 20th April – 20th May 2026                           |
+| Prize Pool     | ₹80,000                                              |
+| Theme Selected | **Theme 3: Productivity Platforms**                  |
+| Framework      | OpenClaw (formerly Clawdbot → Moltbot)               |
+| GitHub Stars   | 247K+ as of March 2026                               |
+| Governance     | OpenClaw Foundation (post-founder Peter Steinberger) |
 
 ### Hackathon Timeline
 
-| Milestone                  | Date              | Deliverable                                              |
-|----------------------------|-------------------|----------------------------------------------------------|
-| Team & Ideas Registration  | 24 April 2026     | Idea submission, theme finalization                      |
-| First-round Submission     | 8 May 2026        | Working code, video demo, GitHub repo, README, PPT       |
-| Second-round Announcement  | 15 May 2026       | Top teams selected                                       |
-| Final Demo                 | 19 May 2026       | Hands-on demo video (10 min, 1–3 scenarios)              |
-| Final Result               | 24 May 2026       | Winners announced per theme                              |
+| Milestone                 | Date          | Deliverable                                        |
+| ------------------------- | ------------- | -------------------------------------------------- |
+| Team & Ideas Registration | 24 April 2026 | Idea submission, theme finalization                |
+| First-round Submission    | 8 May 2026    | Working code, video demo, GitHub repo, README, PPT |
+| Second-round Announcement | 15 May 2026   | Top teams selected                                 |
+| Final Demo                | 19 May 2026   | Hands-on demo video (10 min, 1–3 scenarios)        |
+| Final Result              | 24 May 2026   | Winners announced per theme                        |
 
 ### Final Evaluation Weightings
 
-| Criterion                          | Weight |
-|------------------------------------|--------|
-| Working Prototype / Functionality  | 35%    |
-| Technical Depth of Contribution    | 25%    |
-| User Experience (UI/UX, novelty)   | 15%    |
-| Relevance to Theme & Business Importance | 15% |
-| Presentation & Documentation       | 10%    |
+| Criterion                                | Weight |
+| ---------------------------------------- | ------ |
+| Working Prototype / Functionality        | 35%    |
+| Technical Depth of Contribution          | 25%    |
+| User Experience (UI/UX, novelty)         | 15%    |
+| Relevance to Theme & Business Importance | 15%    |
+| Presentation & Documentation             | 10%    |
 
 ---
 
@@ -76,11 +76,11 @@ OpenClaw is an **autonomous AI agent framework** designed to run on user-owned h
 
 ### 2.1 The Core Metaphor — "The Tank"
 
-| Component  | Metaphor    | Technical Equivalent                                  |
-|------------|-------------|-------------------------------------------------------|
-| The Tank   | Environment | User's hardware: Mac mini, VPS, x86 PC               |
-| The Food   | Intelligence | LLM API keys: Claude (Anthropic), GPT-4, local Llama/DeepSeek |
-| The Rules  | Personality | `SOUL.md` — plain-text behavioral & personality file  |
+| Component | Metaphor     | Technical Equivalent                                          |
+| --------- | ------------ | ------------------------------------------------------------- |
+| The Tank  | Environment  | User's hardware: Mac mini, VPS, x86 PC                        |
+| The Food  | Intelligence | LLM API keys: Claude (Anthropic), GPT-4, local Llama/DeepSeek |
+| The Rules | Personality  | `SOUL.md` — plain-text behavioral & personality file          |
 
 ### 2.2 Core OpenClaw Features
 
@@ -117,21 +117,21 @@ Layer 5 — Skill Execution Layer
 
 ### 2.4 OpenClaw Hardware Requirements
 
-| Spec             | Minimum                    | Recommended                        |
-|------------------|----------------------------|------------------------------------|
-| CPU              | 2-core x86 or ARM          | Apple M-series or 8-core x86       |
-| RAM              | 4 GB                       | 16 GB (for multi-agent setups)     |
-| OS               | macOS, Linux               | macOS (M-series) or Ubuntu 22.04+  |
-| Always-on option | VPS                        | Mac mini or homelab server         |
+| Spec             | Minimum           | Recommended                       |
+| ---------------- | ----------------- | --------------------------------- |
+| CPU              | 2-core x86 or ARM | Apple M-series or 8-core x86      |
+| RAM              | 4 GB              | 16 GB (for multi-agent setups)    |
+| OS               | macOS, Linux      | macOS (M-series) or Ubuntu 22.04+ |
+| Always-on option | VPS               | Mac mini or homelab server        |
 
 ### 2.5 OpenClaw Software Stack
 
-| Component         | Requirement                             |
-|-------------------|-----------------------------------------|
-| Node.js           | ≥ 22 (mandatory)                        |
-| Language          | TypeScript                              |
-| Containerization  | Docker Compose (safest isolation)       |
-| Local LLM (opt.)  | Ollama (DeepSeek, Llama)                |
+| Component        | Requirement                       |
+| ---------------- | --------------------------------- |
+| Node.js          | ≥ 22 (mandatory)                  |
+| Language         | TypeScript                        |
+| Containerization | Docker Compose (safest isolation) |
+| Local LLM (opt.) | Ollama (DeepSeek, Llama)          |
 
 ### 2.6 OpenClaw Install
 
@@ -166,17 +166,17 @@ openclaw onboard --install-daemon
 
 NEXUS is built on core OpenClaw. The following variant ecosystem exists for reference:
 
-| Variant     | Provider     | Use Case                   |
-|-------------|--------------|----------------------------|
-| MiClaw      | Xiaomi       | Mobile-specific             |
-| QClaw       | Tencent      | Cloud-specific              |
-| TuyaClaw    | Tuya Smart   | IoT / edge                  |
-| KimiClaw    | Moonshot AI  | Cloud LLM integration       |
-| ArkClaw     | ByteDance    | Cloud-specific              |
-| EdgeClaw    | OpenBMB      | Edge + cloud                |
-| AutoClaw    | ZhipuAI      | Cloud automation            |
-| CoPaw       | Alibaba      | Enterprise cloud            |
-| IronClaw    | Near AI      | Open source cloud           |
+| Variant  | Provider    | Use Case              |
+| -------- | ----------- | --------------------- |
+| MiClaw   | Xiaomi      | Mobile-specific       |
+| QClaw    | Tencent     | Cloud-specific        |
+| TuyaClaw | Tuya Smart  | IoT / edge            |
+| KimiClaw | Moonshot AI | Cloud LLM integration |
+| ArkClaw  | ByteDance   | Cloud-specific        |
+| EdgeClaw | OpenBMB     | Edge + cloud          |
+| AutoClaw | ZhipuAI     | Cloud automation      |
+| CoPaw    | Alibaba     | Enterprise cloud      |
+| IronClaw | Near AI     | Open source cloud     |
 
 ---
 
@@ -196,20 +196,21 @@ Researchers, analysts, engineers, and knowledge workers constantly lose context 
 - **Literature Gaps:** Relevant new papers get published while a researcher is heads-down. Without a watch system, these are missed for days or weeks.
 
 **Quantified Impact:**
+
 - ~2–4 hours per week per knowledge worker lost to context reconstruction.
 - At a 10-person research team: 20–40 hours/week = 1 full-time equivalent of pure waste.
 - Estimated industry-wide: millions of person-hours annually.
 
 ### 3.2 Why Existing Tools Fail
 
-| Tool          | Gap                                                          |
-|---------------|--------------------------------------------------------------|
-| Notion        | Passive — only stores what you manually write                |
-| Obsidian      | Passive — requires discipline to maintain; no proactive push |
-| Browser history | Unstructured, no semantic understanding                   |
-| Readwise      | Highlights only, no cross-session connection engine          |
-| Google Keep   | No autonomy, no memory, no heartbeat                         |
-| Roam Research | Requires manual graph construction                           |
+| Tool            | Gap                                                          |
+| --------------- | ------------------------------------------------------------ |
+| Notion          | Passive — only stores what you manually write                |
+| Obsidian        | Passive — requires discipline to maintain; no proactive push |
+| Browser history | Unstructured, no semantic understanding                      |
+| Readwise        | Highlights only, no cross-session connection engine          |
+| Google Keep     | No autonomy, no memory, no heartbeat                         |
+| Roam Research   | Requires manual graph construction                           |
 
 NEXUS solves what none of them do: **autonomous, proactive, cross-surface context continuity** powered by an always-on AI agent.
 
@@ -217,19 +218,19 @@ NEXUS solves what none of them do: **autonomous, proactive, cross-surface contex
 
 ## 4. Project Overview — NEXUS
 
-| Field             | Value                                                            |
-|-------------------|------------------------------------------------------------------|
-| Project Name      | **NEXUS**                                                        |
-| Full Name         | Neural EXperience & Understanding Synthesizer                    |
-| Tagline           | "Your research never forgets. Neither should you."               |
-| Framework         | OpenClaw (core)                                                  |
-| Theme             | Productivity Platforms (Theme 3)                                 |
-| Target User       | Researchers, analysts, engineers, writers, knowledge workers     |
-| Primary Value     | Eliminate the "where was I?" problem across all research sessions|
-| Autonomy Level    | Fully autonomous — all 5 core behaviors require zero user input  |
-| LLM Backend       | Anthropic Claude (primary), OpenAI GPT-4 (fallback)             |
-| Memory Format     | Hierarchical Markdown + YAML                                     |
-| Primary Channel   | Desktop notifications + Slack DM + iMessage                     |
+| Field           | Value                                                             |
+| --------------- | ----------------------------------------------------------------- |
+| Project Name    | **NEXUS**                                                         |
+| Full Name       | Neural EXperience & Understanding Synthesizer                     |
+| Tagline         | "Your research never forgets. Neither should you."                |
+| Framework       | OpenClaw (core)                                                   |
+| Theme           | Productivity Platforms (Theme 3)                                  |
+| Target User     | Researchers, analysts, engineers, writers, knowledge workers      |
+| Primary Value   | Eliminate the "where was I?" problem across all research sessions |
+| Autonomy Level  | Fully autonomous — all 5 core behaviors require zero user input   |
+| LLM Backend     | Anthropic Claude (primary), Gemini (fallback)                     |
+| Memory Format   | Hierarchical Markdown + YAML                                      |
+| Primary Channel | Desktop notifications + Slack DM + iMessage                       |
 
 ---
 
@@ -284,18 +285,18 @@ NEXUS solves what none of them do: **autonomous, proactive, cross-surface contex
 
 ### 5.1 Component Responsibilities
 
-| Component           | Responsibility                                                              |
-|---------------------|-----------------------------------------------------------------------------|
-| Browser Extension   | Reads open tab URLs, page titles, reading progress, time-on-page            |
-| File Watcher        | Monitors local directories for note creation/modification events            |
-| Notion/Obsidian API | Pulls recently modified pages; pushes session summaries and digests         |
-| arXiv / Sem. Scholar| Queries for new papers matching tracked research topic keywords             |
-| OpenClaw Gateway    | WebSocket server; routes signals from input layer to Pi Engine              |
-| Pi Engine           | Core agent loop; runs LLM reasoning; dispatches to behavior modules         |
-| HEARTBEAT Daemon    | 30-min background tick; reads HEARTBEAT.md; triggers behavior modules       |
-| Memory Engine       | Reads/writes thread files; maintains index; computes connection graph        |
-| Behavior Modules    | Five pluggable modules (see Section 10) — each has its own trigger + logic  |
-| Output Channels     | Deliver formatted context, alerts, and digests to the user                  |
+| Component            | Responsibility                                                             |
+| -------------------- | -------------------------------------------------------------------------- |
+| Browser Extension    | Reads open tab URLs, page titles, reading progress, time-on-page           |
+| File Watcher         | Monitors local directories for note creation/modification events           |
+| Notion/Obsidian API  | Pulls recently modified pages; pushes session summaries and digests        |
+| arXiv / Sem. Scholar | Queries for new papers matching tracked research topic keywords            |
+| OpenClaw Gateway     | WebSocket server; routes signals from input layer to Pi Engine             |
+| Pi Engine            | Core agent loop; runs LLM reasoning; dispatches to behavior modules        |
+| HEARTBEAT Daemon     | 30-min background tick; reads HEARTBEAT.md; triggers behavior modules      |
+| Memory Engine        | Reads/writes thread files; maintains index; computes connection graph      |
+| Behavior Modules     | Five pluggable modules (see Section 10) — each has its own trigger + logic |
+| Output Channels      | Deliver formatted context, alerts, and digests to the user                 |
 
 ---
 
@@ -342,8 +343,8 @@ threads:
   - id: "llm-alignment-survey"
     slug: "llm-alignment-survey"
     title: "LLM Alignment Survey"
-    status: active           # active | dormant | archived
-    priority: high           # high | medium | low
+    status: active # active | dormant | archived
+    priority: high # high | medium | low
     created_at: "2026-04-20T10:00:00Z"
     last_touched: "2026-05-05T22:15:00Z"
     last_snapshot: "2026-05-05T22:00:00Z"
@@ -355,7 +356,7 @@ threads:
     source_count: 14
     insight_count: 31
     connection_count: 3
-    dormancy_threshold_hours: 72   # after this, thread is "dormant"
+    dormancy_threshold_hours: 72 # after this, thread is "dormant"
     watch_sources:
       - arxiv
       - semantic_scholar
@@ -372,22 +373,27 @@ threads:
 **Priority:** high
 
 ## Summary
-One-paragraph summary of the research thread's current state, 
+
+One-paragraph summary of the research thread's current state,
 auto-generated by NEXUS on each snapshot. Overwritten by agent.
 
 ## Current Focus
+
 What the researcher was actively working on in the most recent session.
 Auto-populated from the last session snapshot.
 
 ## Key Sources
+
 - [Constitutional AI: Harmlessness from AI Feedback](https://arxiv.org/abs/2212.08073) — Anthropic, 2022
 - [Reward Modeling for Mitigating Sycophancy](https://arxiv.org/abs/2309.xxxxx)
 
 ## Open Questions
+
 - [ ] How does RLAIF differ from RLHF at scale?
 - [ ] What is the compute cost differential for Constitutional AI vs. RLHF?
 
 ## Connections
+
 - → thread: `reward-modeling-basics` (shared concept: Bradly-Terry model)
 - → thread: `ai-safety-mechanistic-interp` (cited by: Anthropic 2024 paper)
 ```
@@ -403,10 +409,10 @@ sources:
     published: "2022-12-15"
     added_at: "2026-04-21T14:30:00Z"
     last_read: "2026-04-21T15:45:00Z"
-    reading_progress: 0.85       # 0.0 to 1.0 (from browser extension)
+    reading_progress: 0.85 # 0.0 to 1.0 (from browser extension)
     tags: ["constitutional-ai", "RLHF", "harmlessness"]
     key_excerpt: "We show that Constitutional AI can produce models that are both helpful and harmless..."
-    citation_overlap:            # other threads whose sources cite this
+    citation_overlap: # other threads whose sources cite this
       - "ai-safety-mechanistic-interp"
 ```
 
@@ -419,24 +425,29 @@ sources:
 **Active Thread:** llm-alignment-survey
 
 ## Open Tabs at Snapshot
+
 - [Constitutional AI paper](https://arxiv.org/abs/2212.08073) — 85% read
 - [Reward Modeling for Sycophancy](https://arxiv.org/abs/2309.xxxxx) — 40% read
 - [Anthropic Model Card 2024](https://www.anthropic.com/model-card) — 100% read
 
 ## Recently Copied to Clipboard
-> "The core idea is that instead of using human feedback to train the reward model, 
->  we use AI feedback from a larger model."
+
+> "The core idea is that instead of using human feedback to train the reward model,
+> we use AI feedback from a larger model."
 
 ## Files Modified This Session
+
 - ~/research/alignment-notes.md (Obsidian)
 - ~/Desktop/paper-notes.txt
 
 ## Agent Observations
+
 - High focus on reward model architecture — 3 papers, 45+ minutes
 - New concept introduced: "sycophancy mitigation" — flagged as open question
 - Reading velocity: moderate (suggests deep engagement, not skimming)
 
 ## Suggested Next Session Start
+
 Resume from: reward modeling paper at 40%. Open question: RLAIF cost differential.
 ```
 
@@ -448,13 +459,13 @@ connections:
   - id: "conn_001"
     from_thread: "llm-alignment-survey"
     to_thread: "reward-modeling-basics"
-    strength: 0.87               # 0.0–1.0 semantic similarity score
-    basis: "citation_overlap"    # citation_overlap | keyword_match | manual
+    strength: 0.87 # 0.0–1.0 semantic similarity score
+    basis: "citation_overlap" # citation_overlap | keyword_match | manual
     shared_concepts:
       - "Bradley-Terry preference model"
       - "reward model training"
     discovered_at: "2026-05-05T23:00:00Z"
-    surfaced_to_user: false      # becomes true after agent notifies user
+    surfaced_to_user: false # becomes true after agent notifies user
 ```
 
 ---
@@ -469,57 +480,64 @@ The HEARTBEAT system is OpenClaw's core proactive mechanism. NEXUS configures it
 # NEXUS HEARTBEAT Configuration
 
 ## Tick Interval
+
 every: 30 minutes
 
 ## Behaviors
 
 ### snapshot
+
 trigger: tick
 action: run_session_snapshot
 description: >
-  Poll browser extension for open tabs, check file watcher for 
-  modified notes, check clipboard for new excerpts. Write session
-  entry to active thread's sessions/ directory. Update thread.md
-  summary and last_touched timestamp in _index.yaml.
+Poll browser extension for open tabs, check file watcher for
+modified notes, check clipboard for new excerpts. Write session
+entry to active thread's sessions/ directory. Update thread.md
+summary and last_touched timestamp in \_index.yaml.
 
 ### thread_resurrection
+
 trigger: tick
 condition: dormant_thread_activity_detected
 action: resurface_thread_context
 description: >
-  If a tab URL or modified file maps to a dormant thread
-  (last_touched > dormancy_threshold_hours ago), immediately
-  compose and deliver a context brief within 60 seconds.
-  Include top 3 prior insights, last session summary, open questions.
+If a tab URL or modified file maps to a dormant thread
+(last_touched > dormancy_threshold_hours ago), immediately
+compose and deliver a context brief within 60 seconds.
+Include top 3 prior insights, last session summary, open questions.
 
 ### connection_engine
+
 trigger: daily at 23:00
 action: run_semantic_similarity_pass
 description: >
-  Compute pairwise semantic similarity across all thread insight files.
-  For any pair scoring > 0.75 and not already in _connections.yaml,
-  create a new connection entry. Queue for user notification.
+Compute pairwise semantic similarity across all thread insight files.
+For any pair scoring > 0.75 and not already in \_connections.yaml,
+create a new connection entry. Queue for user notification.
 
 ### morning_briefing
+
 trigger: daily at configured_briefing_time (default 08:30)
 action: generate_morning_briefing
 description: >
-  Compose a morning brief covering all active threads:
-  - What was being worked on (last session summary)
-  - Where it stopped (last checkpoint)
-  - New publications matched overnight (from lit_watch)
-  - Any new connections discovered
+Compose a morning brief covering all active threads:
+
+- What was being worked on (last session summary)
+- Where it stopped (last checkpoint)
+- New publications matched overnight (from lit_watch)
+- Any new connections discovered
   Deliver via configured morning channel (iMessage or Slack).
 
 ### lit_watch
+
 trigger: daily at 06:00
 action: scan_publication_feeds
 description: >
-  For each thread with watch_sources enabled, query arXiv API
-  and Semantic Scholar API using topic_keywords. Compare results
-  against known sources in sources.yaml. Flag new papers with
-  relevance score. Append to thread's sources.yaml with
-  status: "new_unread". Queue for morning briefing.
+For each thread with watch_sources enabled, query arXiv API
+and Semantic Scholar API using topic_keywords. Compare results
+against known sources in sources.yaml. Flag new papers with
+relevance score. Append to thread's sources.yaml with
+status: "new_unread". Queue for morning briefing.
 ```
 
 ### 7.2 Heartbeat State Machine
@@ -557,6 +575,7 @@ These are the OpenClaw "Skills" (tools) that NEXUS registers and invokes.
 **Purpose:** Read active browser state — open tabs, reading progress, time-on-page.
 
 **Implementation:**
+
 - A lightweight browser extension (Chrome/Firefox) exposes a local REST API on `http://localhost:9001`.
 - The extension tracks: tab URL, page title, scroll depth (as reading progress %), time spent on tab.
 - NEXUS polls this endpoint every 30 minutes via the heartbeat.
@@ -586,6 +605,7 @@ Response: [{url, title, visitedAt, duration}]
 **Purpose:** Detect when the user creates or modifies local note files.
 
 **Implementation:**
+
 - Uses Node.js `chokidar` for cross-platform file watching.
 - Monitored paths configured in `_config.yaml` (default: `~/Documents`, `~/research`, `~/Desktop`).
 - On file change: reads diff, extracts new text, maps to thread by keyword matching.
@@ -616,6 +636,7 @@ file_watcher:
 **Auth:** OAuth2 integration token or Internal Integration Token
 
 **Operations:**
+
 ```
 GET /v1/search → query for pages modified in last 30 min
 GET /v1/blocks/{page_id}/children → read page content
@@ -628,10 +649,12 @@ PATCH /v1/blocks/{block_id} → append session summary to existing page
 **Purpose:** Read and write Obsidian vault notes.
 
 **Implementation:**
+
 - Uses the **Obsidian Local REST API** community plugin (`https://github.com/coddingtonbear/obsidian-local-rest-api`).
 - Exposes a local HTTPS API for vault read/write.
 
 **Operations:**
+
 ```
 GET  /vault/{path}             → read note content
 POST /vault/{path}             → create note
@@ -647,6 +670,7 @@ GET  /search/simple?q={query}  → search vault
 **API:** arXiv.org Atom API (no auth required)
 
 **Query format:**
+
 ```
 GET http://export.arxiv.org/api/query?
   search_query=ti:{keyword}+OR+abs:{keyword}
@@ -667,6 +691,7 @@ GET http://export.arxiv.org/api/query?
 **Auth:** Optional API key for higher rate limits
 
 **Operations:**
+
 ```
 GET /paper/search?query={keywords}&fields=title,authors,year,citationCount,abstract
 GET /paper/{paper_id}?fields=references,citations
@@ -678,6 +703,7 @@ GET /paper/{paper_id}/citations
 **Purpose:** Passively capture text excerpts the user copies during research.
 
 **Implementation:**
+
 - Node.js `clipboardy` or platform-native clipboard API polling every 10 seconds.
 - Filters: only captures if copied text is >50 characters (avoids URLs, small snippets).
 - Deduplicates within a 5-minute window.
@@ -690,6 +716,7 @@ GET /paper/{paper_id}/citations
 **Model:** `claude-sonnet-4-20250514` (primary) / `gpt-4o` (fallback)
 
 **Usage contexts:**
+
 - Summarizing a new source's abstract into a 2-sentence insight
 - Generating the morning briefing narrative
 - Describing a newly discovered cross-thread connection
@@ -703,13 +730,13 @@ GET /paper/{paper_id}/citations
 
 ### 9.1 Channels Used by NEXUS
 
-| Channel             | Use Case                                        | Trigger                        |
-|---------------------|-------------------------------------------------|--------------------------------|
-| Desktop notification | Real-time thread resurrection alert            | Dormant thread activity        |
-| Slack DM            | Team-shared research surfaces, morning brief   | Morning briefing, lit. watch   |
-| iMessage            | Mobile catch-up, morning briefing              | Morning briefing               |
-| WhatsApp            | Alternative mobile channel                     | Morning briefing (configured)  |
-| Email / Notion push | Daily/weekly research digest                   | Digest schedule                |
+| Channel              | Use Case                                     | Trigger                       |
+| -------------------- | -------------------------------------------- | ----------------------------- |
+| Desktop notification | Real-time thread resurrection alert          | Dormant thread activity       |
+| Slack DM             | Team-shared research surfaces, morning brief | Morning briefing, lit. watch  |
+| iMessage             | Mobile catch-up, morning briefing            | Morning briefing              |
+| WhatsApp             | Alternative mobile channel                   | Morning briefing (configured) |
+| Email / Notion push  | Daily/weekly research digest                 | Digest schedule               |
 
 ### 9.2 Notification Format — Thread Resurrection
 
@@ -742,7 +769,7 @@ ACTIVE THREADS (3)
    → Left off: reward modeling paper, open question on RLAIF cost
    → NEW: 2 new arXiv papers matched overnight
 
-📌 Distributed Systems Reading [MEDIUM]  
+📌 Distributed Systems Reading [MEDIUM]
    → Left off: Raft consensus deep dive
    → No new sources
 
@@ -773,6 +800,7 @@ All five behaviors run without user input. They are orchestrated by the HEARTBEA
 **Module:** `skills/session-snapshot.js`
 
 **Logic:**
+
 ```
 1. Poll browser extension API → get current tab list
 2. Poll file watcher → get modified files since last snapshot
@@ -794,6 +822,7 @@ All five behaviors run without user input. They are orchestrated by the HEARTBEA
 **Dormancy Definition:** `last_touched` timestamp > `dormancy_threshold_hours` (default: 72h)
 
 **Detection Logic:**
+
 ```
 1. For each signal from browser/file watcher:
    a. Extract URL or file path
@@ -814,6 +843,7 @@ All five behaviors run without user input. They are orchestrated by the HEARTBEA
 **Module:** `skills/connection-engine.js`
 
 **Logic:**
+
 ```
 1. Load all thread insight files (threads/{slug}/insights.md)
 2. For each pair of threads not already in _connections.yaml:
@@ -827,6 +857,7 @@ All five behaviors run without user input. They are orchestrated by the HEARTBEA
 ```
 
 **Connection strength scoring:**
+
 - Citation overlap between source sets: +0.4
 - Shared keywords (from topic_keywords): +0.3 per match (max 0.3)
 - LLM semantic similarity of insights: 0.0–0.3
@@ -837,6 +868,7 @@ All five behaviors run without user input. They are orchestrated by the HEARTBEA
 **Module:** `skills/morning-briefing.js`
 
 **Logic:**
+
 ```
 1. Load _index.yaml → all active threads sorted by priority, last_touched
 2. For each active thread:
@@ -856,6 +888,7 @@ All five behaviors run without user input. They are orchestrated by the HEARTBEA
 **Module:** `skills/lit-watch.js`
 
 **Logic:**
+
 ```
 1. Load _index.yaml → threads with watch_sources enabled
 2. For each such thread:
@@ -1046,23 +1079,23 @@ nexus/
 
 ### 13.1 Required APIs
 
-| Service            | Auth Method              | Rate Limit            | Cost                |
-|--------------------|--------------------------|-----------------------|---------------------|
-| Anthropic Claude   | API key (env var)        | 50 req/min (Sonnet)   | ~$3/M input tokens  |
-| OpenAI GPT-4o      | API key (env var)        | Tier-dependent        | ~$5/M input tokens  |
-| arXiv API          | None (public)            | Polite: 1 req/3 sec   | Free                |
-| Semantic Scholar   | Optional API key         | 100 req/5 min (unauth)| Free                |
-| Notion API         | Integration Token / OAuth| 3 req/sec             | Free (for personal) |
-| Slack Web API      | Bot OAuth Token          | Tier 1: 1 req/sec     | Free                |
+| Service                      | Auth Method               | Rate Limit             | Cost                |
+| ---------------------------- | ------------------------- | ---------------------- | ------------------- |
+| Anthropic Claude             | API key (env var)         | 50 req/min (Sonnet)    | ~$3/M input tokens  |
+| Gemini (formerly OpenAI GPT) | API key (env var)         | Tier-dependent         | ~$5/M input tokens  |
+| arXiv API                    | None (public)             | Polite: 1 req/3 sec    | Free                |
+| Semantic Scholar             | Optional API key          | 100 req/5 min (unauth) | Free                |
+| Notion API                   | Integration Token / OAuth | 3 req/sec              | Free (for personal) |
+| Slack Web API                | Bot OAuth Token           | Tier 1: 1 req/sec      | Free                |
 
 ### 13.2 Optional APIs
 
-| Service            | Purpose                            | Auth              |
-|--------------------|------------------------------------|-------------------|
-| Obsidian Local REST| Read/write Obsidian vault          | Local API key     |
-| BlueBubbles        | iMessage bridge (non-Mac)          | Server + password |
-| SendGrid / Nodemailer| Email digest delivery            | API key           |
-| RSS feeds          | Additional publication sources     | None              |
+| Service               | Purpose                        | Auth              |
+| --------------------- | ------------------------------ | ----------------- |
+| Obsidian Local REST   | Read/write Obsidian vault      | Local API key     |
+| BlueBubbles           | iMessage bridge (non-Mac)      | Server + password |
+| SendGrid / Nodemailer | Email digest delivery          | API key           |
+| RSS feeds             | Additional publication sources | None              |
 
 ### 13.3 Browser Extension
 
@@ -1109,9 +1142,9 @@ nexus/
 ```bash
 # LLM Providers
 ANTHROPIC_API_KEY=sk-ant-...
-OPENAI_API_KEY=sk-...
-LLM_PRIMARY=claude                   # claude | openai | local
-LLM_FALLBACK=openai
+GEMINI_API_KEY=sk-...
+LLM_PRIMARY=claude                   # claude | gemini | local
+LLM_FALLBACK=gemini
 
 # Notion
 NOTION_INTEGRATION_TOKEN=secret_...
@@ -1159,7 +1192,7 @@ NEXUS_LOG_PATH=~/.nexus/logs/nexus.log
 user:
   name: "Researcher Name"
   timezone: "Asia/Kolkata"
-  morning_channel: "imessage"        # imessage | slack | whatsapp | email
+  morning_channel: "imessage" # imessage | slack | whatsapp | email
 
 file_watcher:
   enabled: true
@@ -1321,22 +1354,22 @@ The MVP is designed to be completable within the hackathon timeline while demons
 
 ### 16.1 MVP Feature Set
 
-| Feature                     | Priority | Status       |
-|-----------------------------|----------|--------------|
-| Memory layer (thread files) | P0       | Must build   |
-| Heartbeat daemon (30-min)   | P0       | Must build   |
-| Session snapshot behavior   | P0       | Must build   |
-| Thread resurrection         | P0       | Must build   |
-| Browser extension (basic)   | P0       | Must build   |
-| Morning briefing generator  | P1       | Must build   |
-| Lit. watch (arXiv only)     | P1       | Must build   |
-| Desktop notifications       | P1       | Must build   |
-| Connection engine           | P2       | Build if time|
-| Slack DM channel            | P2       | Build if time|
-| Notion integration          | P3       | Stretch goal |
-| Obsidian integration        | P3       | Stretch goal |
-| iMessage channel            | P3       | Stretch goal |
-| Clipboard monitoring        | P2       | Build if time|
+| Feature                     | Priority | Status        |
+| --------------------------- | -------- | ------------- |
+| Memory layer (thread files) | P0       | Must build    |
+| Heartbeat daemon (30-min)   | P0       | Must build    |
+| Session snapshot behavior   | P0       | Must build    |
+| Thread resurrection         | P0       | Must build    |
+| Browser extension (basic)   | P0       | Must build    |
+| Morning briefing generator  | P1       | Must build    |
+| Lit. watch (arXiv only)     | P1       | Must build    |
+| Desktop notifications       | P1       | Must build    |
+| Connection engine           | P2       | Build if time |
+| Slack DM channel            | P2       | Build if time |
+| Notion integration          | P3       | Stretch goal  |
+| Obsidian integration        | P3       | Stretch goal  |
+| iMessage channel            | P3       | Stretch goal  |
+| Clipboard monitoring        | P2       | Build if time |
 
 ### 16.2 Day-by-Day Build Plan
 
@@ -1375,6 +1408,7 @@ Day 8 (buffer): Connection engine + bug fixes
 ### 16.3 MVP Demo Scenario
 
 **Scenario 1 — Thread Resurrection (90 seconds)**
+
 1. Show researcher has a dormant thread "LLM Alignment Survey" (not opened in 3 days)
 2. Researcher opens an arXiv tab matching the thread
 3. NEXUS detects within the next heartbeat tick
@@ -1382,11 +1416,13 @@ Day 8 (buffer): Connection engine + bug fixes
 5. Researcher clicks → sees where they left off, prior insights, open questions
 
 **Scenario 2 — Morning Briefing (60 seconds)**
+
 1. Show 8:30 AM trigger
 2. NEXUS composes and delivers briefing to Slack/iMessage
 3. Briefing shows: 3 active threads, 2 new overnight arXiv papers, 1 new connection discovered
 
 **Scenario 3 — Live Session Snapshot (60 seconds)**
+
 1. Researcher opens 3 research tabs
 2. 30-minute heartbeat tick runs (demo with shortened 1-min tick for live demo)
 3. NEXUS writes session snapshot — show the generated markdown file
@@ -1396,13 +1432,13 @@ Day 8 (buffer): Connection engine + bug fixes
 
 ## 17. Evaluation Criteria Alignment
 
-| Criterion                        | How NEXUS Addresses It                                                                                  |
-|----------------------------------|----------------------------------------------------------------------------------------------------------|
-| Working Prototype / Functionality (35%) | Full end-to-end autonomous loop: heartbeat → snapshot → resurrection → briefing. All 5 behaviors runnable in demo. |
-| Technical Depth of Contribution (25%)  | Novel cross-session connection engine, semantic similarity scoring, multi-API orchestration, LLM context management strategy. |
-| User Experience / Novelty (15%)        | Zero-friction: user does nothing different. Ambient intelligence. Morning briefings on mobile. Thread resurrection in under 60 seconds. |
-| Relevance to Theme & Business Importance (15%) | Directly solves the "where was I?" productivity problem. Quantifiable ROI: 2–4 hours/week recovered per user. |
-| Presentation & Documentation (10%)     | This README + architecture diagram + demo video + clean GitHub repo with working build.                  |
+| Criterion                                      | How NEXUS Addresses It                                                                                                                  |
+| ---------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
+| Working Prototype / Functionality (35%)        | Full end-to-end autonomous loop: heartbeat → snapshot → resurrection → briefing. All 5 behaviors runnable in demo.                      |
+| Technical Depth of Contribution (25%)          | Novel cross-session connection engine, semantic similarity scoring, multi-API orchestration, LLM context management strategy.           |
+| User Experience / Novelty (15%)                | Zero-friction: user does nothing different. Ambient intelligence. Morning briefings on mobile. Thread resurrection in under 60 seconds. |
+| Relevance to Theme & Business Importance (15%) | Directly solves the "where was I?" productivity problem. Quantifiable ROI: 2–4 hours/week recovered per user.                           |
+| Presentation & Documentation (10%)             | This README + architecture diagram + demo video + clean GitHub repo with working build.                                                 |
 
 ---
 
@@ -1424,12 +1460,12 @@ Day 8 (buffer): Connection engine + bug fixes
 
 ### 18.3 Revenue Model
 
-| Tier         | Price         | Features                                         |
-|--------------|---------------|--------------------------------------------------|
-| Solo         | Free          | 3 threads, 1 channel, 30-min heartbeat           |
-| Researcher   | $12/month     | Unlimited threads, all channels, lit. watch      |
-| Team         | $49/month     | Shared threads, team knowledge graph, admin      |
-| Enterprise   | Custom        | On-premise, SSO, audit logs, custom integrations |
+| Tier       | Price     | Features                                         |
+| ---------- | --------- | ------------------------------------------------ |
+| Solo       | Free      | 3 threads, 1 channel, 30-min heartbeat           |
+| Researcher | $12/month | Unlimited threads, all channels, lit. watch      |
+| Team       | $49/month | Shared threads, team knowledge graph, admin      |
+| Enterprise | Custom    | On-premise, SSO, audit logs, custom integrations |
 
 ### 18.4 Startup-Level Trajectory
 
@@ -1445,18 +1481,23 @@ Day 8 (buffer): Connection engine + bug fixes
 ### 19.1 Primary User Stories
 
 **US-001: Session Snapshot**
+
 > As a researcher, I want NEXUS to automatically capture what I'm working on every 30 minutes, so I never have to manually log my session.
 
 **US-002: Thread Resurrection**
+
 > As a researcher, when I return to a topic I haven't touched in days, I want to be immediately reminded of where I left off and what I previously learned, without having to search my notes.
 
 **US-003: Morning Briefing**
+
 > As a researcher, I want to receive a morning summary on my phone before I open my laptop, so I know exactly which threads to continue and what new sources appeared overnight.
 
 **US-004: Connection Discovery**
+
 > As a researcher, I want NEXUS to tell me when two research threads I'm tracking are related, so I don't miss cross-domain insights.
 
 **US-005: Literature Watch**
+
 > As a researcher, I want NEXUS to monitor arXiv for new papers related to my active research threads, so I stay at the frontier without manual searching.
 
 ### 19.2 User Journey — First Day with NEXUS
@@ -1485,17 +1526,17 @@ Day 8 (buffer): Connection engine + bug fixes
 
 ## 20. KPIs & Benchmarks
 
-| KPI                                  | Target              | Measurement Method                              |
-|--------------------------------------|---------------------|-------------------------------------------------|
-| Thread resurrection latency          | ≤ 60 seconds        | Time from dormant tab open to notification sent |
-| Session snapshot accuracy            | ≥ 90% thread match  | Manual audit of 20 snapshots vs. actual threads |
-| Morning briefing delivery rate       | 100%                | Delivered vs. scheduled count over 7 days       |
-| Literature watch precision           | ≥ 70% relevant      | Human rating of flagged papers (1–5 scale)      |
-| Connection engine F1 score           | ≥ 0.65              | Precision/recall on 10 manually labeled pairs   |
-| Context reconstruction time saved   | ≥ 10 min/day        | User self-report (pre/post survey)              |
-| Memory read latency                  | ≤ 200ms             | Benchmark: load _index.yaml + 3 thread files    |
-| LLM call latency per behavior        | ≤ 5 seconds         | Measured in integration tests                   |
-| Agent uptime                         | ≥ 99% over 7 days   | Process monitor / health check logs             |
+| KPI                               | Target             | Measurement Method                              |
+| --------------------------------- | ------------------ | ----------------------------------------------- |
+| Thread resurrection latency       | ≤ 60 seconds       | Time from dormant tab open to notification sent |
+| Session snapshot accuracy         | ≥ 90% thread match | Manual audit of 20 snapshots vs. actual threads |
+| Morning briefing delivery rate    | 100%               | Delivered vs. scheduled count over 7 days       |
+| Literature watch precision        | ≥ 70% relevant     | Human rating of flagged papers (1–5 scale)      |
+| Connection engine F1 score        | ≥ 0.65             | Precision/recall on 10 manually labeled pairs   |
+| Context reconstruction time saved | ≥ 10 min/day       | User self-report (pre/post survey)              |
+| Memory read latency               | ≤ 200ms            | Benchmark: load \_index.yaml + 3 thread files   |
+| LLM call latency per behavior     | ≤ 5 seconds        | Measured in integration tests                   |
+| Agent uptime                      | ≥ 99% over 7 days  | Process monitor / health check logs             |
 
 ---
 
@@ -1503,13 +1544,13 @@ Day 8 (buffer): Connection engine + bug fixes
 
 As required by hackathon rules, all AI usage in preparing this project is disclosed below.
 
-| Artifact          | AI Model/API Used            | Purpose                                    |
-|-------------------|------------------------------|--------------------------------------------|
-| README.md         | Claude Sonnet 4.6 (claude.ai)| Full README generation from panel evaluation |
-| Architecture design | Claude Sonnet 4.6          | Architectural decisions, component design  |
-| Prompt templates  | Claude Sonnet 4.6            | Initial prompt engineering for LLM skills  |
-| Idea evaluation   | Claude Sonnet 4.6            | 5-persona hackathon panel evaluation       |
-| Code (planned)    | Claude Sonnet API            | LLM calls within NEXUS for summarization   |
+| Artifact            | AI Model/API Used             | Purpose                                      |
+| ------------------- | ----------------------------- | -------------------------------------------- |
+| README.md           | Claude Sonnet 4.6 (claude.ai) | Full README generation from panel evaluation |
+| Architecture design | Claude Sonnet 4.6             | Architectural decisions, component design    |
+| Prompt templates    | Claude Sonnet 4.6             | Initial prompt engineering for LLM skills    |
+| Idea evaluation     | Claude Sonnet 4.6             | 5-persona hackathon panel evaluation         |
+| Code (planned)      | Claude Sonnet API             | LLM calls within NEXUS for summarization     |
 
 All code implementation, integration testing, and demo production are done by the human team.
 
@@ -1518,29 +1559,29 @@ All code implementation, integration testing, and demo production are done by th
 ## 22. Glossary
 
 | Term                  | Definition                                                                                          |
-|-----------------------|-----------------------------------------------------------------------------------------------------|
-| OpenClaw              | Autonomous AI agent framework (formerly Clawdbot/Moltbot). Open-source, self-hosted.               |
+| --------------------- | --------------------------------------------------------------------------------------------------- |
+| OpenClaw              | Autonomous AI agent framework (formerly Clawdbot/Moltbot). Open-source, self-hosted.                |
 | SOUL.md               | Plain-text file defining agent personality, rules, and behavioral boundaries in OpenClaw.           |
 | HEARTBEAT.md          | OpenClaw configuration file that defines proactive, time-based agent behaviors.                     |
 | HEARTBEAT daemon      | Background process that reads HEARTBEAT.md and fires behavior triggers on a schedule.               |
-| Pi Engine             | OpenClaw's agent reasoning core; runs the plan → act → observe → update loop.                      |
+| Pi Engine             | OpenClaw's agent reasoning core; runs the plan → act → observe → update loop.                       |
 | Skill                 | A pluggable tool or behavior module in OpenClaw's execution layer.                                  |
-| Thread                | A named research topic tracked by NEXUS; has its own memory files, sources, insights, sessions.    |
+| Thread                | A named research topic tracked by NEXUS; has its own memory files, sources, insights, sessions.     |
 | Session snapshot      | A timestamped markdown file capturing the researcher's active state at a heartbeat tick.            |
 | Thread resurrection   | Behavior that detects return to a dormant thread and immediately resurfaces prior context.          |
-| Connection engine     | Nightly behavior that computes semantic similarity between threads and surfaces cross-domain links.  |
+| Connection engine     | Nightly behavior that computes semantic similarity between threads and surfaces cross-domain links. |
 | Morning briefing      | Daily AI-composed summary of all active threads, new papers, and connections, delivered on mobile.  |
 | Literature watch      | Daily behavior that monitors arXiv and Semantic Scholar for new papers matching thread keywords.    |
-| Dormant thread        | A thread whose `last_touched` timestamp exceeds the configured dormancy threshold (default: 72h).  |
-| _index.yaml           | Master registry of all threads — status, timestamps, keywords, counts.                             |
-| _connections.yaml     | Graph file recording discovered semantic connections between threads.                               |
-| Cognitive RAM         | OpenClaw's memory paging approach — loading only relevant context into the LLM window as needed.   |
-| Browser Extension API | Local REST API (port 9001) exposed by the NEXUS browser extension for tab state access.           |
+| Dormant thread        | A thread whose `last_touched` timestamp exceeds the configured dormancy threshold (default: 72h).   |
+| \_index.yaml          | Master registry of all threads — status, timestamps, keywords, counts.                              |
+| \_connections.yaml    | Graph file recording discovered semantic connections between threads.                               |
+| Cognitive RAM         | OpenClaw's memory paging approach — loading only relevant context into the LLM window as needed.    |
+| Browser Extension API | Local REST API (port 9001) exposed by the NEXUS browser extension for tab state access.             |
 | Protocol Adapter      | OpenClaw Layer 2 component that normalizes all communication channels into a unified interface.     |
-| NEXUS                 | Neural EXperience & Understanding Synthesizer — this project.                                      |
+| NEXUS                 | Neural EXperience & Understanding Synthesizer — this project.                                       |
 
 ---
 
-*Built for the CLASH OF THE CLAWS — OpenClaw Hackathon 2026*
-*Theme 3: Productivity Platforms | Prize Pool: ₹80,000*
-*Framework: OpenClaw (openclaw.ai) | LLM: Anthropic Claude*
+_Built for the CLASH OF THE CLAWS — OpenClaw Hackathon 2026_
+_Theme 3: Productivity Platforms | Prize Pool: ₹80,000_
+_Framework: OpenClaw (openclaw.ai) | LLM: Anthropic Claude_

@@ -5,6 +5,10 @@
   "description": "Tracks tabs and reading progress for NEXUS.",
   "permissions": ["tabs", "activeTab", "storage", "scripting", "alarms"],
   "host_permissions": ["http://localhost:9001/*"],
+  "action": {
+    "default_title": "NEXUS",
+    "default_popup": "popup.html"
+  },
   "background": {
     "service_worker": "background.js"
   },

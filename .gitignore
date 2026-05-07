@@ -1,0 +1,38 @@
+# Dependencies
+node_modules/
+
+# Environment and secrets
+.env
+.env.*
+!.env.example
+
+# Build output
+dist/
+coverage/
+
+# Runtime data
+.nexus*/
+_heartbeat.json
+browser-extension/state.json
+*.log
+logs/
+
+# Test and tool caches
+.jest/
+.eslintcache
+.cache/
+.nyc_output/
+
+# Generated JavaScript beside TypeScript sources/tests
+tests/**/*.js
+tests/**/*.js.map
+src/**/*.js
+src/**/*.js.map
+
+# OS and editor files
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+.vscode/
+.idea/

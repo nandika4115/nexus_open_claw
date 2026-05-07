@@ -13,11 +13,14 @@ import { createLitWatchBehavior } from "./skills/lit-watch.js";
 import { createMorningBriefingBehavior } from "./skills/morning-briefing.js";
 import { createSessionSnapshotBehavior } from "./skills/session-snapshot.js";
 import { createThreadResurrectionBehavior } from "./skills/thread-resurrection.js";
+import { registerDashboard } from "./ui/dashboard.js";
 import { ArxivClient } from "./tools/arxiv-client.js";
 import { BrowserExtensionClient } from "./tools/browser-extension.js";
 import { ClipboardMonitor } from "./tools/clipboard-monitor.js";
+import { CoreClient } from "./tools/core-client.js";
 import { FileWatcher } from "./tools/file-watcher.js";
 import { LlmClient } from "./tools/llm-client.js";
+import { OpenClawCli } from "./tools/openclaw-cli.js";
 import { SemanticScholarClient } from "./tools/semantic-scholar.js";
 import { DesktopNotifier } from "./channels/desktop-notify.js";
 import { SlackChannel } from "./channels/slack.js";
@@ -58,10 +61,12 @@ async function main(): Promise<void> {
   clipboard.start();
 
   const tools = {
+    openclaw: new OpenClawCli({ command: config.env.OPENCLAW_CLI_PATH }),
     browser: new BrowserExtensionClient(config.browserExtPort),
     fileWatcher,
     clipboard,
     arxiv: new ArxivClient(),
+    core: new CoreClient(config.env.CORE_API_KEY),
     semanticScholar: new SemanticScholarClient(config.env.SEMANTIC_SCHOLAR_API_KEY),
     llm: config.runtimeConfig
       ? new LlmClient(
@@ -69,7 +74,7 @@ async function main(): Promise<void> {
             primary: config.env.LLM_PRIMARY,
             fallback: config.env.LLM_FALLBACK,
             anthropicApiKey: config.env.ANTHROPIC_API_KEY,
-            openaiApiKey: config.env.OPENAI_API_KEY,
+            geminiApiKey: config.env.GEMINI_API_KEY,
             maxContextTokens: config.runtimeConfig.llm.max_context_tokens,
             maxOutputTokens: config.runtimeConfig.llm.max_output_tokens,
             temperature: config.runtimeConfig.llm.temperature,
@@ -89,7 +94,12 @@ async function main(): Promise<void> {
     imessage: config.env.IMESSAGE_RECIPIENT
       ? new IMessageChannel(config.env.IMESSAGE_RECIPIENT)
       : undefined,
-    whatsapp: new WhatsAppChannel(),
+    whatsapp: config.env.WHATSAPP_ENABLED
+      ? new WhatsAppChannel({
+          openclaw: tools.openclaw,
+          recipient: config.env.WHATSAPP_RECIPIENT
+        })
+      : undefined,
     email:
       config.env.SMTP_HOST && config.env.SMTP_USER && config.env.SMTP_PASS && config.env.EMAIL_RECIPIENTS
         ? new EmailChannel({
@@ -123,10 +133,26 @@ async function main(): Promise<void> {
   engine.registerBehavior("connection_engine", createConnectionEngineBehavior(skillServices).handler);
   engine.registerBehavior("morning_briefing", createMorningBriefingBehavior(skillServices).handler);
   engine.registerBehavior("lit_watch", createLitWatchBehavior(skillServices).handler);
+  const litWatchBehavior = createLitWatchBehavior(skillServices);
 
   const router = new GatewayRouter(logger, (signal) => engine.handleSignal(signal));
   const gateway = new GatewayServer(logger, router, {
-    port: Number(process.env.PORT ?? "8080")
+    port: Number(process.env.PORT ?? "8080"),
+    configureApp: (app) =>
+      registerDashboard(app, {
+        config,
+        memory,
+        logger,
+        openclaw: tools.openclaw,
+        runLitWatch: () =>
+          litWatchBehavior.handler({
+            signal: {
+              type: "daily_schedule",
+              timestamp: new Date().toISOString(),
+              payload: { schedule: "lit_watch" }
+            }
+          })
+      })
   });
 
   gateway.start();

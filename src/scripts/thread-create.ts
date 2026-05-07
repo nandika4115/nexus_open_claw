@@ -22,6 +22,11 @@ async function main(): Promise<void> {
   await rl.close();
 
   const slug = title.toLowerCase().replace(/\s+/g, "-");
+  const watchSources: Thread["watch_sources"] = watch.toLowerCase().startsWith("y")
+    ? config.env.SEMANTIC_SCHOLAR_API_KEY
+      ? ["arxiv", "core", "semantic_scholar"]
+      : ["arxiv", "core"]
+    : [];
   const thread: Thread = {
     id: slug,
     slug,
@@ -36,7 +41,7 @@ async function main(): Promise<void> {
     insight_count: 0,
     connection_count: 0,
     dormancy_threshold_hours: Number(dormancyRaw) || 72,
-    watch_sources: watch.toLowerCase().startsWith("y") ? ["arxiv", "semantic_scholar"] : []
+    watch_sources: watchSources
   };
 
   await memory.index.updateThread(thread);
