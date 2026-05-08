@@ -11,7 +11,9 @@ dist/
 coverage/
 
 # Runtime data
+.mnemochron*/
 .nexus*/
+tmp_run_all/
 _heartbeat.json
 browser-extension/state.json
 *.log
@@ -22,12 +24,20 @@ logs/
 .eslintcache
 .cache/
 .nyc_output/
+__pycache__/
+*.pyc
 
 # Generated JavaScript beside TypeScript sources/tests
 tests/**/*.js
 tests/**/*.js.map
 src/**/*.js
 src/**/*.js.map
+
+# Generated browser extension artifacts
+browser-extension.crx
+browser-extension.pem
+*.crx
+*.pem
 
 # OS and editor files
 .DS_Store
@@ -36,3 +46,4 @@ Thumbs.db
 *.swo
 .vscode/
 .idea/
+*.docx
