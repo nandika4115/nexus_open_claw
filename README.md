@@ -4,9 +4,23 @@
 
 `MNEMOCHRON` is a persistent, proactive research cognition layer built on the **OpenClaw autonomous AI agent framework**. It lives alongside a researcher's workflow — silently capturing, connecting, and resurfacing intellectual context across time, tools, and sessions. It does not wait to be asked; it thinks _with_ the user.
 
-This README is the single source of truth for any CLI agent, developer, or automated system tasked with building, extending, or deploying mnemochron. Every design decision, data contract, file structure, API dependency, agent behavior, and build instruction is documented here.
+# 🚀 Submission Assets
 
----
+<div align="center">
+
+# MNEMOCHRON — Submissions
+
+<br>
+
+| Asset | Description | Access |
+|:--|:--|:--|
+| Demo Video | Complete walkthrough of mnemochron and autonomous workflows | [Watch Demo](https://drive.google.com/file/d/1U4BaIbd7NYDoVvQlbZIzpomar03C4j3j/view?usp=sharing) |
+| Pitch Presentation | Hackathon pitch deck, architecture, and implementation slides | [Open Slides](https://drive.google.com/file/d/1yWEtHWoDShwp7FbHh887INIVCRW9nl0q/view?usp=sharing) |
+|  AI Disclosure Document | Full AI usage disclosure and compliance document | [View Disclosure](https://docs.google.com/document/d/1fRlsi7aHf1ePjPIgv5E7GPvgcDJpRB1g/edit?usp=sharing&ouid=115854686768982175703&rtpof=true&sd=true) |
+
+
+</div>
+
 
 ## Table of Contents
 
