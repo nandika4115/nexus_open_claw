@@ -1,8 +1,8 @@
-# mnemochron — Neural EXperience & Understanding Synthesizer
+# MNEMOCHRON — Neural EXperience & Understanding Synthesizer
 
 > **"Your research never forgets. Neither should you."**
 
-`mnemochron` is a persistent, proactive research cognition layer built on the **OpenClaw autonomous AI agent framework**. It lives alongside a researcher's workflow — silently capturing, connecting, and resurfacing intellectual context across time, tools, and sessions. It does not wait to be asked; it thinks _with_ the user.
+`MNEMOCHRON` is a persistent, proactive research cognition layer built on the **OpenClaw autonomous AI agent framework**. It lives alongside a researcher's workflow — silently capturing, connecting, and resurfacing intellectual context across time, tools, and sessions. It does not wait to be asked; it thinks _with_ the user.
 
 This README is the single source of truth for any CLI agent, developer, or automated system tasked with building, extending, or deploying mnemochron. Every design decision, data contract, file structure, API dependency, agent behavior, and build instruction is documented here.
 
@@ -10,181 +10,35 @@ This README is the single source of truth for any CLI agent, developer, or autom
 
 ## Table of Contents
 
-1. [Hackathon Context](#1-hackathon-context)
-2. [OpenClaw Framework — Full Reference](#2-openclaw-framework--full-reference)
-3. [Problem Statement](#3-problem-statement)
-4. [Project Overview — mnemochron](#4-project-overview--mnemochron)
-5. [Architecture — High-Level](#5-architecture--high-level)
-6. [Memory Layer — Full Specification](#6-memory-layer--full-specification)
-7. [Heartbeat System — Full Specification](#7-heartbeat-system--full-specification)
-8. [Tool Execution Layer](#8-tool-execution-layer)
-9. [Channel / Output Layer](#9-channel--output-layer)
-10. [Autonomous Behaviors — Detailed Logic](#10-autonomous-behaviors--detailed-logic)
-11. [Agent Reasoning Loop](#11-agent-reasoning-loop)
-12. [File & Directory Structure](#12-file--directory-structure)
-13. [API Integrations & External Dependencies](#13-api-integrations--external-dependencies)
-14. [Environment Variables & Configuration](#14-environment-variables--configuration)
-15. [Setup & Installation](#15-setup--installation)
-16. [MVP Scope — Hackathon Build Plan](#16-mvp-scope--hackathon-build-plan)
-17. [Evaluation Criteria Alignment](#17-evaluation-criteria-alignment)
-18. [Future Scale Vision](#18-future-scale-vision)
-19. [User Stories & Journeys](#19-user-stories--journeys)
-20. [KPIs & Benchmarks](#20-kpis--benchmarks)
-21. [AI Disclosure](#21-ai-disclosure)
-22. [Glossary](#22-glossary)
+
+1. [Problem Statement](#1-problem-statement)
+2. [Project Overview — mnemochron](#2-project-overview--mnemochron)
+3. [Architecture — High-Level](#3-architecture--high-level)
+4. [Memory Layer — Full Specification](#4-memory-layer--full-specification)
+5. [Heartbeat System — Full Specification](#5-heartbeat-system--full-specification)
+6. [Tool Execution Layer](#6-tool-execution-layer)
+7. [Channel / Output Layer](#7-channel--output-layer)
+8. [Autonomous Behaviors — Detailed Logic](#8-autonomous-behaviors--detailed-logic)
+9. [Agent Reasoning Loop](#9-agent-reasoning-loop)
+10. [File & Directory Structure](#10-file--directory-structure)
+11. [API Integrations & External Dependencies](#11-api-integrations--external-dependencies)
+12. [Environment Variables & Configuration](#12-environment-variables--configuration)
+13. [Setup & Installation](#13-setup--installation)
+14. [User Stories & Journeys](#14-user-stories--journeys)
+15. [KPIs & Benchmarks](#15-kpis--benchmarks)
+16. [AI Disclosure](#16-ai-disclosure)
+17. [Glossary](#17-glossary)
+
+
+
 
 ---
 
-## 1. Hackathon Context
-
-| Field          | Detail                                               |
-| -------------- | ---------------------------------------------------- |
-| Hackathon Name | **CLASH OF THE CLAWS — The OpenClaw Hackathon**      |
-| Organized by   | Tech Management, SRI-B (Samsung R&D Institute)       |
-| Duration       | 20th April – 20th May 2026                           |
-| Prize Pool     | ₹80,000                                              |
-| Theme Selected | **Theme 3: Productivity Platforms**                  |
-| Framework      | OpenClaw (formerly Clawdbot → Moltbot)               |
-| GitHub Stars   | 247K+ as of March 2026                               |
-| Governance     | OpenClaw Foundation (post-founder Peter Steinberger) |
-
-### Hackathon Timeline
-
-| Milestone                 | Date          | Deliverable                                        |
-| ------------------------- | ------------- | -------------------------------------------------- |
-| Team & Ideas Registration | 24 April 2026 | Idea submission, theme finalization                |
-| First-round Submission    | 8 May 2026    | Working code, video demo, GitHub repo, README, PPT |
-| Second-round Announcement | 15 May 2026   | Top teams selected                                 |
-| Final Demo                | 19 May 2026   | Hands-on demo video (10 min, 1–3 scenarios)        |
-| Final Result              | 24 May 2026   | Winners announced per theme                        |
-
-### Final Evaluation Weightings
-
-| Criterion                                | Weight |
-| ---------------------------------------- | ------ |
-| Working Prototype / Functionality        | 35%    |
-| Technical Depth of Contribution          | 25%    |
-| User Experience (UI/UX, novelty)         | 15%    |
-| Relevance to Theme & Business Importance | 15%    |
-| Presentation & Documentation             | 10%    |
-
----
-
-## 2. OpenClaw Framework — Full Reference
-
-OpenClaw is an **autonomous AI agent framework** designed to run on user-owned hardware (Mac mini, VPS, homelab). It gives users full AI sovereignty — the agent runs locally, stores memory locally, and is not dependent on any single cloud vendor.
-
-### 2.1 The Core Metaphor — "The Tank"
-
-| Component | Metaphor     | Technical Equivalent                                          |
-| --------- | ------------ | ------------------------------------------------------------- |
-| The Tank  | Environment  | User's hardware: Mac mini, VPS, x86 PC                        |
-| The Food  | Intelligence | LLM API keys: Claude (Anthropic), GPT-4, local Llama/DeepSeek |
-| The Rules | Personality  | `SOUL.md` — plain-text behavioral & personality file          |
-
-### 2.2 Core OpenClaw Features
-
-- **Persistent Memory:** Markdown and YAML files stored locally. Fully inspectable, diff-able, version-controllable. Survives restarts and resets.
-- **HEARTBEAT System:** A background daemon that reads `HEARTBEAT.md` and acts proactively without user prompts — sending reminders, digests, alerts.
-- **Multi-Channel Communication:** WhatsApp, Telegram, Discord, iMessage, Slack, Signal, Microsoft Teams, Matrix, Twitch, Google Chat.
-- **Tool / Skill Execution:** Shell commands, API calls, file system access, automation scripts — executed in isolated sandboxes.
-- **Media & Document Support:** Processes and sends images, audio, files. Supports Live Canvas (A2UI) for interactive dashboards.
-- **Durable Memory (Cognitive RAM):** Pages relevant context from disk into the LLM context window as needed. Handles projects larger than single-session limits.
-- **No Vendor Lock-in:** Swap LLM backends without losing any memory or agent state.
-
-### 2.3 The 5-Layer OpenClaw Stack
-
-```
-Layer 1 — Communication Layer
-        WhatsApp · Discord · Slack · Telegram · iMessage · Signal · Teams · Matrix
-        ↓
-Layer 2 — Channel Adapter
-        ProtocolAdapter: normalizes all platforms into a unified agent interface
-        ↓
-Layer 3 — Gateway (Control Plane)
-        TypeScript/Node.js WebSocket server
-        Handles: routing, authentication, session management
-        ↓
-Layer 4 — Pi Engine (Agent Loop)
-        Reasoning core embedded as dynamic library
-        High-speed, event-driven execution
-        Runs the plan → act → observe → update memory loop
-        ↓
-Layer 5 — Skill Execution Layer
-        Invokes tools, runs shell commands
-        Manages system actions in isolated sandboxes
-```
-
-### 2.4 OpenClaw Hardware Requirements
-
-| Spec             | Minimum           | Recommended                       |
-| ---------------- | ----------------- | --------------------------------- |
-| CPU              | 2-core x86 or ARM | Apple M-series or 8-core x86      |
-| RAM              | 4 GB              | 16 GB (for multi-agent setups)    |
-| OS               | macOS, Linux      | macOS (M-series) or Ubuntu 22.04+ |
-| Always-on option | VPS               | Mac mini or homelab server        |
-
-### 2.5 OpenClaw Software Stack
-
-| Component        | Requirement                       |
-| ---------------- | --------------------------------- |
-| Node.js          | ≥ 22 (mandatory)                  |
-| Language         | TypeScript                        |
-| Containerization | Docker Compose (safest isolation) |
-| Local LLM (opt.) | Ollama (DeepSeek, Llama)          |
-
-### 2.6 OpenClaw Install
-
-```bash
-# One-liner (Mac/Linux)
-curl -fsSL https://openclaw.ai/install.sh | bash
-
-# Onboarding wizard
-openclaw onboard --install-daemon
-
-# Channel setup (guided)
-# WhatsApp: QR scan
-# Telegram: BotFather token
-# Discord: OAuth2 portal
-```
-
-### 2.7 SOUL.md — Agent Personality File
-
-`SOUL.md` is a plain-text file that defines the agent's personality, behavioral rules, and operating constraints. For mnemochron, this file should encode:
-
-- Agent name and purpose
-- Tone (helpful, non-intrusive, research-aware)
-- Privacy rules (never exfiltrate data, local-only by default)
-- Escalation rules (when to notify vs. stay silent)
-- LLM provider preference and fallback chain
-
-### 2.8 HEARTBEAT.md — Proactive Behavior File
-
-`HEARTBEAT.md` defines what the agent does on a time-based schedule without user input. It is read by the background daemon at each tick. For mnemochron, this file encodes all five autonomous behavior triggers (see Section 10).
-
-### 2.9 OpenClaw Variants Ecosystem
-
-`mnemochron` is built on core OpenClaw. The following variant ecosystem exists for reference:
-
-| Variant  | Provider    | Use Case              |
-| -------- | ----------- | --------------------- |
-| MiClaw   | Xiaomi      | Mobile-specific       |
-| QClaw    | Tencent     | Cloud-specific        |
-| TuyaClaw | Tuya Smart  | IoT / edge            |
-| KimiClaw | Moonshot AI | Cloud LLM integration |
-| ArkClaw  | ByteDance   | Cloud-specific        |
-| EdgeClaw | OpenBMB     | Edge + cloud          |
-| AutoClaw | ZhipuAI     | Cloud automation      |
-| CoPaw    | Alibaba     | Enterprise cloud      |
-| IronClaw | Near AI     | Open source cloud     |
-
----
-
-## 3. Problem Statement
+## 1. Problem Statement
 
 **Theme:** Productivity Platforms — "What tools can you create to make your life at work easier and to make AI your best colleague?"
 
-### 3.1 Core Problem
+### 1.1 Core Problem
 
 Researchers, analysts, engineers, and knowledge workers constantly lose context across work sessions. The specific failure modes are:
 
@@ -201,7 +55,7 @@ Researchers, analysts, engineers, and knowledge workers constantly lose context 
 - At a 10-person research team: 20–40 hours/week = 1 full-time equivalent of pure waste.
 - Estimated industry-wide: millions of person-hours annually.
 
-### 3.2 Why Existing Tools Fail
+### 1.2 Why Existing Tools Fail
 
 | Tool            | Gap                                                          |
 | --------------- | ------------------------------------------------------------ |
@@ -216,7 +70,7 @@ Researchers, analysts, engineers, and knowledge workers constantly lose context 
 
 ---
 
-## 4. Project Overview — mnemochron
+## 2. Project Overview — mnemochron
 
 | Field           | Value                                                             |
 | --------------- | ----------------------------------------------------------------- |
@@ -234,7 +88,7 @@ Researchers, analysts, engineers, and knowledge workers constantly lose context 
 
 ---
 
-## 5. Architecture — High-Level
+## 3. Architecture — High-Level
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
@@ -283,7 +137,7 @@ Researchers, analysts, engineers, and knowledge workers constantly lose context 
                                                     INPUT LAYER ←┘
 ```
 
-### 5.1 Component Responsibilities
+### 3.1 Component Responsibilities
 
 | Component            | Responsibility                                                             |
 | -------------------- | -------------------------------------------------------------------------- |
@@ -300,11 +154,11 @@ Researchers, analysts, engineers, and knowledge workers constantly lose context 
 
 ---
 
-## 6. Memory Layer — Full Specification
+## 4. Memory Layer — Full Specification
 
 The memory layer is the most critical component of mnemochron. It is OpenClaw's persistent markdown/YAML storage, extended with a hierarchical structure designed specifically for research context.
 
-### 6.1 Root Directory Layout
+### 4.1 Root Directory Layout
 
 ```
 ~/.mnemochron/memory/
@@ -332,7 +186,7 @@ The memory layer is the most critical component of mnemochron. It is OpenClaw's 
     └── {YYYY-MM-DD}-morning.md
 ```
 
-### 6.2 `_index.yaml` — Master Thread Registry
+### 4.2 `_index.yaml` — Master Thread Registry
 
 ```yaml
 # _index.yaml
@@ -362,7 +216,7 @@ threads:
       - semantic_scholar
 ```
 
-### 6.3 `threads/{slug}/thread.md` — Main Thread File
+### 4.3 `threads/{slug}/thread.md` — Main Thread File
 
 ```markdown
 # Thread: LLM Alignment Survey
@@ -398,7 +252,7 @@ Auto-populated from the last session snapshot.
 - → thread: `ai-safety-mechanistic-interp` (cited by: Anthropic 2024 paper)
 ```
 
-### 6.4 `threads/{slug}/sources.yaml` — Source Registry
+### 4.4 `threads/{slug}/sources.yaml` — Source Registry
 
 ```yaml
 sources:
@@ -416,7 +270,7 @@ sources:
       - "ai-safety-mechanistic-interp"
 ```
 
-### 6.5 `threads/{slug}/sessions/{timestamp}.md` — Session Snapshot
+### 4.5 `threads/{slug}/sessions/{timestamp}.md` — Session Snapshot
 
 ```markdown
 # Session Snapshot — 2026-05-05 22:00
@@ -451,7 +305,7 @@ sources:
 Resume from: reward modeling paper at 40%. Open question: RLAIF cost differential.
 ```
 
-### 6.6 `_connections.yaml` — Cross-Thread Connection Graph
+### 4.6 `_connections.yaml` — Cross-Thread Connection Graph
 
 ```yaml
 # _connections.yaml
@@ -470,11 +324,11 @@ connections:
 
 ---
 
-## 7. Heartbeat System — Full Specification
+## 5. Heartbeat System — Full Specification
 
 The HEARTBEAT system is OpenClaw's core proactive mechanism. mnemochron configures it to run a 30-minute snapshot cycle plus several scheduled daily behaviors.
 
-### 7.1 `HEARTBEAT.md` — mnemochron Configuration
+### 5.1 `HEARTBEAT.md` — mnemochron Configuration
 
 ```markdown
 # mnemochron HEARTBEAT Configuration
@@ -540,7 +394,7 @@ relevance score. Append to thread's sources.yaml with
 status: "new_unread". Queue for morning briefing.
 ```
 
-### 7.2 Heartbeat State Machine
+### 5.2 Heartbeat State Machine
 
 ```
 TICK (every 30 min)
@@ -566,11 +420,11 @@ TICK (every 30 min)
 
 ---
 
-## 8. Tool Execution Layer
+## 6. Tool Execution Layer
 
 These are the OpenClaw "Skills" (tools) that mnemochron registers and invokes.
 
-### 8.1 Tool: Browser Extension API Bridge
+### 6.1 Tool: Browser Extension API Bridge
 
 **Purpose:** Read active browser state — open tabs, reading progress, time-on-page.
 
@@ -600,7 +454,7 @@ GET http://localhost:9001/history?since={iso_timestamp}
 Response: [{url, title, visitedAt, duration}]
 ```
 
-### 8.2 Tool: File System Watcher
+### 6.2 Tool: File System Watcher
 
 **Purpose:** Detect when the user creates or modifies local note files.
 
@@ -628,7 +482,7 @@ file_watcher:
   debounce_ms: 2000
 ```
 
-### 8.3 Tool: Notion API Bridge
+### 6.3 Tool: Notion API Bridge
 
 **Purpose:** Pull recently modified Notion pages; push session summaries and digests.
 
@@ -644,7 +498,7 @@ POST /v1/pages → create new digest or briefing page
 PATCH /v1/blocks/{block_id} → append session summary to existing page
 ```
 
-### 8.4 Tool: Obsidian API Bridge
+### 6.4 Tool: Obsidian API Bridge
 
 **Purpose:** Read and write Obsidian vault notes.
 
@@ -663,7 +517,7 @@ GET  /vault/                   → list all notes
 GET  /search/simple?q={query}  → search vault
 ```
 
-### 8.5 Tool: arXiv API Client
+### 6.5 Tool: arXiv API Client
 
 **Purpose:** Query for new preprints matching tracked research topic keywords.
 
@@ -682,7 +536,7 @@ GET http://export.arxiv.org/api/query?
 
 **Response parsing:** Atom XML → extract title, authors, abstract, arxiv_id, submitted date.
 
-### 8.6 Tool: Semantic Scholar API Client
+### 6.6 Tool: Semantic Scholar API Client
 
 **Purpose:** Find related papers, compute citation overlap between threads.
 
@@ -698,7 +552,7 @@ GET /paper/{paper_id}?fields=references,citations
 GET /paper/{paper_id}/citations
 ```
 
-### 8.7 Tool: Clipboard Monitor
+### 6.7 Tool: Clipboard Monitor
 
 **Purpose:** Passively capture text excerpts the user copies during research.
 
@@ -709,7 +563,7 @@ GET /paper/{paper_id}/citations
 - Deduplicates within a 5-minute window.
 - Appends captured excerpts to the active thread's current session snapshot.
 
-### 8.8 Tool: LLM Summarization (Claude API)
+### 6.8 Tool: LLM Summarization (Claude API)
 
 **Purpose:** Auto-generate thread summaries, insight extraction, connection descriptions, briefing text.
 
@@ -726,9 +580,9 @@ GET /paper/{paper_id}/citations
 
 ---
 
-## 9. Channel / Output Layer
+## 7. Channel / Output Layer
 
-### 9.1 Channels Used by mnemochron
+### 7.1 Channels Used by mnemochron
 
 | Channel              | Use Case                                     | Trigger                       |
 | -------------------- | -------------------------------------------- | ----------------------------- |
@@ -738,7 +592,7 @@ GET /paper/{paper_id}/citations
 | WhatsApp             | Alternative mobile channel                   | Morning briefing (configured) |
 | Email / Notion push  | Daily/weekly research digest                 | Digest schedule               |
 
-### 9.2 Notification Format — Thread Resurrection
+### 7.2 Notification Format — Thread Resurrection
 
 ```
 📚 mnemochron: Thread Resurface Alert
@@ -758,43 +612,43 @@ Top 3 prior insights:
 [ Continue thread → ] [ Dismiss ] [ Archive ]
 ```
 
-### 9.3 Morning Briefing Format
+### 7.3 Morning Briefing Format
 
 ```
-☀️ mnemochron Morning Briefing — May 6, 2026
+ mnemochron Morning Briefing — May 6, 2026
 
 ACTIVE THREADS (3)
 
-📌 LLM Alignment Survey [HIGH]
+ LLM Alignment Survey [HIGH]
    → Left off: reward modeling paper, open question on RLAIF cost
    → NEW: 2 new arXiv papers matched overnight
 
-📌 Distributed Systems Reading [MEDIUM]
+ Distributed Systems Reading [MEDIUM]
    → Left off: Raft consensus deep dive
    → No new sources
 
-📌 Product Strategy Research [MEDIUM]
+ Product Strategy Research [MEDIUM]
    → Left off: Jobs-to-be-done framework comparison
 
-🔗 NEW CONNECTION FOUND
+ NEW CONNECTION FOUND
    "LLM Alignment Survey" ↔ "Reward Modeling Basics"
    Shared concept: Bradley-Terry preference model
    [ View connection → ]
 
-📄 OVERNIGHT PAPERS (2 new)
+ OVERNIGHT PAPERS (2 new)
    • "RLHF at Scale: Cost Analysis" (arXiv, yesterday)
    • "Mitigating Reward Hacking via KL Penalty" (arXiv, 2 days ago)
 
-Have a productive session. 🧠
+Have a productive session. 
 ```
 
 ---
 
-## 10. Autonomous Behaviors — Detailed Logic
+## 8. Autonomous Behaviors — Detailed Logic
 
 All five behaviors run without user input. They are orchestrated by the HEARTBEAT daemon and implemented as pluggable modules in the Skill Execution Layer.
 
-### 10.1 Behavior 1: Session Snapshot
+### 8.1 Behavior 1: Session Snapshot
 
 **Trigger:** Every HEARTBEAT tick (30 min)
 **Module:** `skills/session-snapshot.js`
@@ -814,7 +668,7 @@ All five behaviors run without user input. They are orchestrated by the HEARTBEA
 
 **Output:** One `.md` session file per thread per tick (only written if new signals exist).
 
-### 10.2 Behavior 2: Thread Resurrection
+### 8.2 Behavior 2: Thread Resurrection
 
 **Trigger:** Dormant thread activity detected during any heartbeat tick
 **Module:** `skills/thread-resurrection.js`
@@ -837,7 +691,7 @@ All five behaviors run without user input. They are orchestrated by the HEARTBEA
    f. Update thread status → active in _index.yaml
 ```
 
-### 10.3 Behavior 3: Connection Engine
+### 8.3 Behavior 3: Connection Engine
 
 **Trigger:** Daily at 23:00
 **Module:** `skills/connection-engine.js`
@@ -862,7 +716,7 @@ All five behaviors run without user input. They are orchestrated by the HEARTBEA
 - Shared keywords (from topic_keywords): +0.3 per match (max 0.3)
 - LLM semantic similarity of insights: 0.0–0.3
 
-### 10.4 Behavior 4: Morning Briefing
+### 8.4 Behavior 4: Morning Briefing
 
 **Trigger:** Daily at user-configured time (default 08:30)
 **Module:** `skills/morning-briefing.js`
@@ -882,7 +736,7 @@ All five behaviors run without user input. They are orchestrated by the HEARTBEA
 7. Mark new sources and connections as surfaced in their respective YAML files
 ```
 
-### 10.5 Behavior 5: Literature Watch
+### 8.5 Behavior 5: Literature Watch
 
 **Trigger:** Daily at 06:00 (before morning briefing runs)
 **Module:** `skills/lit-watch.js`
@@ -908,7 +762,7 @@ All five behaviors run without user input. They are orchestrated by the HEARTBEA
 
 ---
 
-## 11. Agent Reasoning Loop
+## 9. Agent Reasoning Loop
 
 The Pi Engine runs mnemochron's core reasoning loop. Each behavior module is invoked within this loop.
 
@@ -969,7 +823,7 @@ EVENT RECEIVED
 └─────────────────┘
 ```
 
-### 11.1 LLM Context Management
+### 9.1 LLM Context Management
 
 Because research threads can exceed a single LLM context window, mnemochron uses OpenClaw's **Cognitive RAM** approach:
 
@@ -981,7 +835,7 @@ Because research threads can exceed a single LLM context window, mnemochron uses
 
 ---
 
-## 12. File & Directory Structure
+## 10. File & Directory Structure
 
 Complete directory structure that any agent can replicate to set up mnemochron from scratch.
 
@@ -1075,9 +929,9 @@ mnemochron/
 
 ---
 
-## 13. API Integrations & External Dependencies
+## 11. API Integrations & External Dependencies
 
-### 13.1 Required APIs
+### 11.1 Required APIs
 
 | Service                      | Auth Method               | Rate Limit             | Cost                |
 | ---------------------------- | ------------------------- | ---------------------- | ------------------- |
@@ -1088,7 +942,7 @@ mnemochron/
 | Notion API                   | Integration Token / OAuth | 3 req/sec              | Free (for personal) |
 | Slack Web API                | Bot OAuth Token           | Tier 1: 1 req/sec      | Free                |
 
-### 13.2 Optional APIs
+### 11.2 Optional APIs
 
 | Service               | Purpose                        | Auth              |
 | --------------------- | ------------------------------ | ----------------- |
@@ -1097,13 +951,13 @@ mnemochron/
 | SendGrid / Nodemailer | Email digest delivery          | API key           |
 | RSS feeds             | Additional publication sources | None              |
 
-### 13.3 Browser Extension
+### 11.3 Browser Extension
 
 - **Chrome:** Manifest V3, Local REST API on `localhost:9001`
 - **Firefox:** WebExtensions API, same local REST endpoint
 - **Permissions required:** `tabs`, `activeTab`, `storage`, `scripting`
 
-### 13.4 npm Dependencies
+### 11.4 npm Dependencies
 
 ```json
 {
@@ -1135,9 +989,9 @@ mnemochron/
 
 ---
 
-## 14. Environment Variables & Configuration
+## 12. Environment Variables & Configuration
 
-### 14.1 `.env` File
+### 12.1 `.env` File
 
 ```bash
 # LLM Providers
@@ -1189,7 +1043,7 @@ MNEMOCHRON_LOG_LEVEL=info            # debug | info | warn | error
 MNEMOCHRON_LOG_PATH=~/.mnemochron/logs/mnemochron.log
 ```
 
-### 14.2 `_config.yaml` — Runtime Configuration
+### 12.2 `_config.yaml` — Runtime Configuration
 
 ```yaml
 # ~/.mnemochron/memory/_config.yaml
@@ -1246,16 +1100,16 @@ llm:
 
 ---
 
-## 15. Setup & Installation
+## 13. Setup & Installation
 
-### 15.1 Prerequisites
+### 13.1 Prerequisites
 
 ```bash
 node --version    # Must be ≥ 22
 npm --version     # Must be ≥ 10
 ```
 
-### 15.2 Install OpenClaw
+### 13.2 Install OpenClaw
 
 ```bash
 # Install OpenClaw (required runtime)
@@ -1265,7 +1119,7 @@ curl -fsSL https://openclaw.ai/install.sh | bash
 openclaw --version
 ```
 
-### 15.3 Clone & Install mnemochron
+### 13.3 Clone & Install mnemochron
 
 ```bash
 git clone https://github.com/your-team/mnemochron-openclaw.git
@@ -1275,7 +1129,7 @@ cp .env.example .env
 # Fill in your API keys in .env
 ```
 
-### 15.4 Initialize Memory
+### 13.4 Initialize Memory
 
 ```bash
 npm run setup
@@ -1286,7 +1140,7 @@ npm run setup
 # 4. Prompts for initial thread creation (optional)
 ```
 
-### 15.5 Install Browser Extension
+### 13.5 Install Browser Extension
 
 ```bash
 # Chrome
@@ -1299,7 +1153,7 @@ npm run setup
 # 2. Click "Load Temporary Add-on" → select ./browser-extension/manifest.json
 ```
 
-### 15.6 Start mnemochron
+### 13.6 Start mnemochron
 
 ```bash
 # Development
@@ -1313,7 +1167,7 @@ npm start
 docker-compose up -d
 ```
 
-### 15.7 OpenClaw Channel Setup
+### 13.7 OpenClaw Channel Setup
 
 ```bash
 # Slack
@@ -1326,7 +1180,7 @@ openclaw onboard --channel=imessage
 openclaw onboard --channel=whatsapp   # QR scan
 ```
 
-### 15.8 Verify Installation
+### 13.8 Verify Installation
 
 ```bash
 npm run health-check
@@ -1339,7 +1193,7 @@ npm run health-check
 # ✅ Channels: desktop_notify ✓ | slack ✓ | imessage ✓
 ```
 
-### 15.9 Create First Research Thread
+### 13.9 Create First Research Thread
 
 ```bash
 npm run thread:create
@@ -1351,139 +1205,10 @@ npm run thread:create
 # - Dormancy threshold (hours)
 ```
 
----
 
-## 16. MVP Scope — Hackathon Build Plan
+## 14. User Stories & Journeys
 
-The MVP is designed to be completable within the hackathon timeline while demonstrating all core autonomous behaviors.
-
-### 16.1 MVP Feature Set
-
-| Feature                     | Priority | Status        |
-| --------------------------- | -------- | ------------- |
-| Memory layer (thread files) | P0       | Must build    |
-| Heartbeat daemon (30-min)   | P0       | Must build    |
-| Session snapshot behavior   | P0       | Must build    |
-| Thread resurrection         | P0       | Must build    |
-| Browser extension (basic)   | P0       | Must build    |
-| Morning briefing generator  | P1       | Must build    |
-| Lit. watch (arXiv only)     | P1       | Must build    |
-| Desktop notifications       | P1       | Must build    |
-| Connection engine           | P2       | Build if time |
-| Slack DM channel            | P2       | Build if time |
-| Notion integration          | P3       | Stretch goal  |
-| Obsidian integration        | P3       | Stretch goal  |
-| iMessage channel            | P3       | Stretch goal  |
-| Clipboard monitoring        | P2       | Build if time |
-
-### 16.2 Day-by-Day Build Plan
-
-```
-Day 1-2: Foundation
-  - OpenClaw gateway setup
-  - Memory layer implementation (_index.yaml, thread CRUD)
-  - SOUL.md + HEARTBEAT.md templates
-  - _config.yaml schema + reader
-
-Day 3-4: Browser Extension + Snapshot
-  - Browser extension (tab API, reading progress)
-  - Local REST API (port 9001)
-  - Session snapshot skill (Behavior 1)
-  - File watcher integration
-
-Day 5-6: Resurrection + Morning Brief
-  - Thread resurrection skill (Behavior 2)
-  - Morning briefing generator (Behavior 4)
-  - Desktop notifications
-  - LLM integration (Claude API)
-
-Day 7: Lit Watch + Polish
-  - arXiv API client (Behavior 5)
-  - Slack DM channel
-  - Clipboard monitor
-  - End-to-end test: full heartbeat cycle
-  - Demo recording
-
-Day 8 (buffer): Connection engine + bug fixes
-  - Connection engine (Behavior 3) if time permits
-  - KPI instrumentation
-  - README and documentation finalization
-```
-
-### 16.3 MVP Demo Scenario
-
-**Scenario 1 — Thread Resurrection (90 seconds)**
-
-1. Show researcher has a dormant thread "LLM Alignment Survey" (not opened in 3 days)
-2. Researcher opens an arXiv tab matching the thread
-3. mnemochron detects within the next heartbeat tick
-4. Desktop notification fires within 60 seconds with full context brief
-5. Researcher clicks → sees where they left off, prior insights, open questions
-
-**Scenario 2 — Morning Briefing (60 seconds)**
-
-1. Show 8:30 AM trigger
-2. mnemochron composes and delivers briefing to Slack/iMessage
-3. Briefing shows: 3 active threads, 2 new overnight arXiv papers, 1 new connection discovered
-
-**Scenario 3 — Live Session Snapshot (60 seconds)**
-
-1. Researcher opens 3 research tabs
-2. 30-minute heartbeat tick runs (demo with shortened 1-min tick for live demo)
-3. mnemochron writes session snapshot — show the generated markdown file
-4. Thread `_index.yaml` updated in real-time — show diff
-
----
-
-## 17. Evaluation Criteria Alignment
-
-| Criterion                                      | How mnemochron Addresses It                                                                                                              |
-| ---------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
-| Working Prototype / Functionality (35%)        | Full end-to-end autonomous loop: heartbeat → snapshot → resurrection → briefing. All 5 behaviors runnable in demo.                      |
-| Technical Depth of Contribution (25%)          | Novel cross-session connection engine, semantic similarity scoring, multi-API orchestration, LLM context management strategy.           |
-| User Experience / Novelty (15%)                | Zero-friction: user does nothing different. Ambient intelligence. Morning briefings on mobile. Thread resurrection in under 60 seconds. |
-| Relevance to Theme & Business Importance (15%) | Directly solves the "where was I?" productivity problem. Quantifiable ROI: 2–4 hours/week recovered per user.                           |
-| Presentation & Documentation (10%)             | This README + architecture diagram + demo video + clean GitHub repo with working build.                                                 |
-
----
-
-## 18. Future Scale Vision
-
-### 18.1 Team / Enterprise Features
-
-- **Shared thread spaces:** Multiple team members contribute to the same research thread. mnemochron surfaces connections across team members' individual sessions.
-- **Conflict detection:** "You and Sarah are both researching the same framework independently — here's what she found."
-- **Knowledge graph UI:** A visual browser for the `_connections.yaml` graph, rendered as an interactive node graph.
-- **Institutional knowledge capture:** As team members leave, their threads are archived and searchable by the team.
-
-### 18.2 Platform Extensions
-
-- **VS Code extension:** Monitors open files and code comments to capture engineering research threads.
-- **Zotero integration:** Import existing citation libraries as thread seed data.
-- **YouTube / podcast monitoring:** Detect research-relevant content from watched videos or listened podcasts.
-- **GitHub integration:** Monitor starred repos, open issues, and README reads as research signals.
-
-### 18.3 Revenue Model
-
-| Tier       | Price     | Features                                         |
-| ---------- | --------- | ------------------------------------------------ |
-| Solo       | Free      | 3 threads, 1 channel, 30-min heartbeat           |
-| Researcher | $12/month | Unlimited threads, all channels, lit. watch      |
-| Team       | $49/month | Shared threads, team knowledge graph, admin      |
-| Enterprise | Custom    | On-premise, SSO, audit logs, custom integrations |
-
-### 18.4 Startup-Level Trajectory
-
-- **0–6 months:** Open-source MVP on OpenClaw, researcher community adoption
-- **6–12 months:** Managed cloud version, Notion/Obsidian plugin listing
-- **12–24 months:** Team features, enterprise sales, Samsung PRISM worklet integration
-- **24–36 months:** Full knowledge graph platform; acquisition target for Notion, Obsidian, or Anthropic
-
----
-
-## 19. User Stories & Journeys
-
-### 19.1 Primary User Stories
+### 14.1 Primary User Stories
 
 **US-001: Session Snapshot**
 
@@ -1505,7 +1230,7 @@ Day 8 (buffer): Connection engine + bug fixes
 
 > As a researcher, I want mnemochron to monitor arXiv for new papers related to my active research threads, so I stay at the frontier without manual searching.
 
-### 19.2 User Journey — First Day with mnemochron
+### 14.2 User Journey — First Day with mnemochron
 
 ```
 08:30 → Researcher receives first morning briefing (empty — no threads yet)
@@ -1529,7 +1254,7 @@ Day 8 (buffer): Connection engine + bug fixes
 
 ---
 
-## 20. KPIs & Benchmarks
+## 15. KPIs & Benchmarks
 
 | KPI                               | Target             | Measurement Method                              |
 | --------------------------------- | ------------------ | ----------------------------------------------- |
@@ -1545,7 +1270,7 @@ Day 8 (buffer): Connection engine + bug fixes
 
 ---
 
-## 21. AI Disclosure
+## 16. AI Disclosure
 
 As required by hackathon rules, all AI usage in preparing this project is disclosed below.
 
@@ -1583,7 +1308,7 @@ Below is a short classification of core features indicating whether they are sel
 
 ---
 
-## 22. Glossary
+## 17. Glossary
 
 | Term                  | Definition                                                                                          |
 | --------------------- | --------------------------------------------------------------------------------------------------- |
@@ -1609,6 +1334,3 @@ Below is a short classification of core features indicating whether they are sel
 
 ---
 
-_Built for the CLASH OF THE CLAWS — OpenClaw Hackathon 2026_
-_Theme 3: Productivity Platforms | Prize Pool: ₹80,000_
-_Framework: OpenClaw (openclaw.ai) | LLM: Anthropic Claude_
