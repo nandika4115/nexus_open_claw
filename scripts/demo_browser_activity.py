@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """
-Simulate real browser-extension activity for the NEXUS dashboard.
+Simulate real browser-extension activity for the mnemochron dashboard.
 
 This script posts the same kind of snapshots that the Chrome extension sends to
-the browser bridge at http://localhost:9001/ingest. It can also ask the NEXUS
+the browser bridge at http://localhost:9001/ingest. It can also ask the mnemochron
 dashboard to import the simulated tabs into a research thread as sources.
 """
 
@@ -124,7 +124,7 @@ def choose_thread(dashboard_url: str, requested_slug: str | None) -> str | None:
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description="Simulate NEXUS browser-extension tab visits.")
+    parser = argparse.ArgumentParser(description="Simulate mnemochron browser-extension tab visits.")
     parser.add_argument("--bridge-url", default="http://localhost:9001")
     parser.add_argument("--dashboard-url", default="http://localhost:8080")
     parser.add_argument("--steps", type=int, default=8)
@@ -172,7 +172,7 @@ def main() -> int:
             )
         except HTTPError as error:
             print(
-                "Import failed. Rebuild and restart NEXUS so /api/threads/:slug/import-tabs exists. "
+                "Import failed. Rebuild and restart mnemochron so /api/threads/:slug/import-tabs exists. "
                 f"HTTP {error.code}",
                 file=sys.stderr,
             )
@@ -187,6 +187,6 @@ if __name__ == "__main__":
     try:
         raise SystemExit(main())
     except (ConnectionRefusedError, HTTPError, URLError) as error:
-        print(f"Could not reach NEXUS service: {error}", file=sys.stderr)
+        print(f"Could not reach mnemochron service: {error}", file=sys.stderr)
         print("Start the services first: npm run browser:bridge and npm start", file=sys.stderr)
         raise SystemExit(1)

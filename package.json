@@ -1,7 +1,7 @@
 {
-  "name": "nexus-openclaw",
+  "name": "mnemochron-openclaw",
   "version": "0.1.0",
-  "description": "NEXUS — Neural EXperience & Understanding Synthesizer",
+  "description": "mnemochron — Neural EXperience & Understanding Synthesizer",
   "private": true,
   "type": "module",
   "engines": {
@@ -22,6 +22,12 @@
     "browser:bridge": "node browser-extension/api-server.js",
     "demo:dashboard": "node dist/scripts/demo-dashboard.js",
     "demo:browser": "python scripts/demo_browser_activity.py --import-tabs",
+    "demo:judge": "python scripts/judge_demo.py",
+    "demo:judge:live": "python scripts/judge_demo.py --keep-services",
+    "demo:judge:send": "python scripts/judge_demo.py --send",
+    "demo:judge:pdf": "python scripts/json_report_to_pdf.py",
+    "demo:user": "python scripts/fake_user_process.py",
+    "demo:user:send": "python scripts/fake_user_process.py --send",
     "setup": "node dist/scripts/setup.js",
     "thread:create": "node dist/scripts/thread-create.js"
   },

@@ -1,10 +1,10 @@
-# CORE-backed NEXUS research run
+# CORE-backed mnemochron research run
 
 Run date: 2026-05-07
 
 ## Goal
 
-Run NEXUS like a real user doing literature discovery, without a Semantic Scholar API key, using CORE as the scholarly search provider.
+Run mnemochron like a real user doing literature discovery, without a Semantic Scholar API key, using CORE as the scholarly search provider.
 
 Chosen research topic:
 
@@ -51,24 +51,24 @@ Build the project:
 npm.cmd run build
 ```
 
-Create an isolated local NEXUS memory folder for the research run:
+Create an isolated local mnemochron memory folder for the research run:
 
 ```powershell
-$env:NEXUS_MEMORY_PATH='D:\nexus_open_claw\.nexus-research-run'
+$env:MNEMOCHRON_MEMORY_PATH='<repo>\.mnemochron-research-run'
 node dist/scripts/setup.js
 ```
 
-Create the research thread through the compiled NEXUS memory APIs:
+Create the research thread through the compiled mnemochron memory APIs:
 
 ```powershell
-$env:NEXUS_MEMORY_PATH='D:\nexus_open_claw\.nexus-research-run'
+$env:MNEMOCHRON_MEMORY_PATH='<repo>\.mnemochron-research-run'
 node --input-type=module -e "import { loadConfig } from './dist/config/index.js'; import { createLogger } from './dist/utils/logger.js'; import { createMemoryStores } from './dist/memory/index.js'; import { toIsoTimestamp } from './dist/utils/time.js'; const config=await loadConfig(); const logger=createLogger({level:config.logLevel, logPath:config.logPath}); const memory=createMemoryStores(config.memoryPath, logger); const now=toIsoTimestamp(); const thread={id:'retrieval-augmented-generation-evaluation',slug:'retrieval-augmented-generation-evaluation',title:'Retrieval Augmented Generation Evaluation',status:'active',priority:'high',created_at:now,last_touched:now,last_snapshot:now,topic_keywords:['retrieval augmented generation','RAG evaluation','hallucination reduction','open domain question answering'],source_count:0,insight_count:0,connection_count:0,dormancy_threshold_hours:72,watch_sources:['core']}; await memory.index.updateThread(thread); await memory.threads.ensureThreadStructure(thread); process.exit(0);"
 ```
 
 Run the lit-watch behavior against CORE:
 
 ```powershell
-$env:NEXUS_MEMORY_PATH='D:\nexus_open_claw\.nexus-research-run'
+$env:MNEMOCHRON_MEMORY_PATH='<repo>\.mnemochron-research-run'
 node --input-type=module -e "import { loadConfig } from './dist/config/index.js'; import { createLogger } from './dist/utils/logger.js'; import { createMemoryStores } from './dist/memory/index.js'; import { HeartbeatStateStore } from './dist/engine/heartbeat-state.js'; import { createLitWatchBehavior } from './dist/skills/lit-watch.js'; import { CoreClient } from './dist/tools/core-client.js'; const config=await loadConfig(); const logger=createLogger({level:config.logLevel, logPath:config.logPath}); const memory=createMemoryStores(config.memoryPath, logger); await memory.index.load(); await memory.connections.load(); const services={config,memory,tools:{core:new CoreClient(config.env.CORE_API_KEY)},channels:{},heartbeatState:new HeartbeatStateStore(config.memoryPath),logger}; const behavior=createLitWatchBehavior(services); await behavior.handler({signal:{type:'daily_schedule',timestamp:new Date().toISOString(),payload:{schedule:'lit_watch'}}}); process.exit(0);"
 ```
 
@@ -83,18 +83,18 @@ Lit watch complete: newSources=10, thread=retrieval-augmented-generation-evaluat
 Raw lit-watch results:
 
 ```text
-.nexus-research-run\threads\retrieval-augmented-generation-evaluation\lit-watch-2026-05-07.json
+.mnemochron-research-run\threads\retrieval-augmented-generation-evaluation\lit-watch-2026-05-07.json
 ```
 
 Saved sources:
 
 ```text
-.nexus-research-run\threads\retrieval-augmented-generation-evaluation\sources.yaml
+.mnemochron-research-run\threads\retrieval-augmented-generation-evaluation\sources.yaml
 ```
 
 ## Final research result
 
-NEXUS added 10 new unread CORE sources for the topic.
+`mnemochron` added 10 new unread CORE sources for the topic.
 
 1. Graphrag for the Portuguese legal domain - a comparative study of graph-based document relationships and traditional RAG pipelines
    - Author: Patricia Nunes Domingos Esteves

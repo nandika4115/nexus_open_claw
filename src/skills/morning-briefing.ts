@@ -66,7 +66,7 @@ export function createMorningBriefingBehavior(services: SkillServices): PlannedB
 
       const connectionBlocks = connections.slice(0, 3).map((conn) => formatConnection(conn));
       const briefing = [
-        `☀️ NEXUS Morning Briefing — ${formatDateStamp()}`,
+        `☀️ mnemochron Morning Briefing — ${formatDateStamp()}`,
         "",
         `ACTIVE THREADS (${active.length})`,
         "",
@@ -124,6 +124,6 @@ async function deliverBriefing(services: SkillServices, message: string): Promis
     return;
   }
   if (channel === "email" && services.channels.email) {
-    await services.channels.email.send("NEXUS Morning Briefing", message);
+    await services.channels.email.send("mnemochron Morning Briefing", message);
   }
 }

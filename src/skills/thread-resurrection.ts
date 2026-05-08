@@ -77,7 +77,7 @@ export function createThreadResurrectionBehavior(services: SkillServices): Plann
 
       if (channels.desktop && config.runtimeConfig?.channels.desktop_notify) {
         await channels.desktop.notify({
-          title: "NEXUS: Thread Resurface Alert",
+          title: "mnemochron: Thread Resurface Alert",
           message
         });
       }

@@ -114,7 +114,7 @@ async function main(): Promise<void> {
     `# ${thread.title}
 
 ## Summary
-Demo thread for testing the NEXUS dashboard, CORE-backed sources, and browser context display.
+Demo thread for testing the mnemochron dashboard, CORE-backed sources, and browser context display.
 
 ## Current Focus
 Compare how RAG evaluation papers measure factuality, hallucination reduction, retrieval quality, and domain-specific grounding.

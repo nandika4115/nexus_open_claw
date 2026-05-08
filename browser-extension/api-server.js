@@ -53,5 +53,5 @@ app.get("/history", (req, res) => {
 
 app.listen(port, () => {
   // eslint-disable-next-line no-console
-  console.log(`NEXUS browser API listening on http://localhost:${port}`);
+  console.log(`mnemochron browser API listening on http://localhost:${port}`);
 });

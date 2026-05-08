@@ -1,10 +1,10 @@
-# NEXUS — Neural EXperience & Understanding Synthesizer
+# mnemochron — Neural EXperience & Understanding Synthesizer
 
 > **"Your research never forgets. Neither should you."**
 
-NEXUS is a persistent, proactive research cognition layer built on the **OpenClaw autonomous AI agent framework**. It lives alongside a researcher's workflow — silently capturing, connecting, and resurfacing intellectual context across time, tools, and sessions. It does not wait to be asked; it thinks _with_ the user.
+`mnemochron` is a persistent, proactive research cognition layer built on the **OpenClaw autonomous AI agent framework**. It lives alongside a researcher's workflow — silently capturing, connecting, and resurfacing intellectual context across time, tools, and sessions. It does not wait to be asked; it thinks _with_ the user.
 
-This README is the single source of truth for any CLI agent, developer, or automated system tasked with building, extending, or deploying NEXUS. Every design decision, data contract, file structure, API dependency, agent behavior, and build instruction is documented here.
+This README is the single source of truth for any CLI agent, developer, or automated system tasked with building, extending, or deploying mnemochron. Every design decision, data contract, file structure, API dependency, agent behavior, and build instruction is documented here.
 
 ---
 
@@ -13,7 +13,7 @@ This README is the single source of truth for any CLI agent, developer, or autom
 1. [Hackathon Context](#1-hackathon-context)
 2. [OpenClaw Framework — Full Reference](#2-openclaw-framework--full-reference)
 3. [Problem Statement](#3-problem-statement)
-4. [Project Overview — NEXUS](#4-project-overview--nexus)
+4. [Project Overview — mnemochron](#4-project-overview--mnemochron)
 5. [Architecture — High-Level](#5-architecture--high-level)
 6. [Memory Layer — Full Specification](#6-memory-layer--full-specification)
 7. [Heartbeat System — Full Specification](#7-heartbeat-system--full-specification)
@@ -150,7 +150,7 @@ openclaw onboard --install-daemon
 
 ### 2.7 SOUL.md — Agent Personality File
 
-`SOUL.md` is a plain-text file that defines the agent's personality, behavioral rules, and operating constraints. For NEXUS, this file should encode:
+`SOUL.md` is a plain-text file that defines the agent's personality, behavioral rules, and operating constraints. For mnemochron, this file should encode:
 
 - Agent name and purpose
 - Tone (helpful, non-intrusive, research-aware)
@@ -160,11 +160,11 @@ openclaw onboard --install-daemon
 
 ### 2.8 HEARTBEAT.md — Proactive Behavior File
 
-`HEARTBEAT.md` defines what the agent does on a time-based schedule without user input. It is read by the background daemon at each tick. For NEXUS, this file encodes all five autonomous behavior triggers (see Section 10).
+`HEARTBEAT.md` defines what the agent does on a time-based schedule without user input. It is read by the background daemon at each tick. For mnemochron, this file encodes all five autonomous behavior triggers (see Section 10).
 
 ### 2.9 OpenClaw Variants Ecosystem
 
-NEXUS is built on core OpenClaw. The following variant ecosystem exists for reference:
+`mnemochron` is built on core OpenClaw. The following variant ecosystem exists for reference:
 
 | Variant  | Provider    | Use Case              |
 | -------- | ----------- | --------------------- |
@@ -212,15 +212,15 @@ Researchers, analysts, engineers, and knowledge workers constantly lose context 
 | Google Keep     | No autonomy, no memory, no heartbeat                         |
 | Roam Research   | Requires manual graph construction                           |
 
-NEXUS solves what none of them do: **autonomous, proactive, cross-surface context continuity** powered by an always-on AI agent.
+`mnemochron` solves what none of them do: **autonomous, proactive, cross-surface context continuity** powered by an always-on AI agent.
 
 ---
 
-## 4. Project Overview — NEXUS
+## 4. Project Overview — mnemochron
 
 | Field           | Value                                                             |
 | --------------- | ----------------------------------------------------------------- |
-| Project Name    | **NEXUS**                                                         |
+| Project Name    | **mnemochron**                                                    |
 | Full Name       | Neural EXperience & Understanding Synthesizer                     |
 | Tagline         | "Your research never forgets. Neither should you."                |
 | Framework       | OpenClaw (core)                                                   |
@@ -302,12 +302,12 @@ NEXUS solves what none of them do: **autonomous, proactive, cross-surface contex
 
 ## 6. Memory Layer — Full Specification
 
-The memory layer is the most critical component of NEXUS. It is OpenClaw's persistent markdown/YAML storage, extended with a hierarchical structure designed specifically for research context.
+The memory layer is the most critical component of mnemochron. It is OpenClaw's persistent markdown/YAML storage, extended with a hierarchical structure designed specifically for research context.
 
 ### 6.1 Root Directory Layout
 
 ```
-~/.nexus/memory/
+~/.mnemochron/memory/
 ├── _index.yaml                    # Master thread registry
 ├── _connections.yaml              # Cross-thread connection graph
 ├── _config.yaml                   # User preferences and settings
@@ -375,7 +375,7 @@ threads:
 ## Summary
 
 One-paragraph summary of the research thread's current state,
-auto-generated by NEXUS on each snapshot. Overwritten by agent.
+auto-generated by mnemochron on each snapshot. Overwritten by agent.
 
 ## Current Focus
 
@@ -472,12 +472,13 @@ connections:
 
 ## 7. Heartbeat System — Full Specification
 
-The HEARTBEAT system is OpenClaw's core proactive mechanism. NEXUS configures it to run a 30-minute snapshot cycle plus several scheduled daily behaviors.
 
-### 7.1 `HEARTBEAT.md` — NEXUS Configuration
+The HEARTBEAT system is OpenClaw's core proactive mechanism. mnemochron configures it to run a 30-minute snapshot cycle plus several scheduled daily behaviors.
+
+### 7.1 `HEARTBEAT.md` — mnemochron Configuration
 
 ```markdown
-# NEXUS HEARTBEAT Configuration
+# mnemochron HEARTBEAT Configuration
 
 ## Tick Interval
 
@@ -568,7 +569,7 @@ TICK (every 30 min)
 
 ## 8. Tool Execution Layer
 
-These are the OpenClaw "Skills" (tools) that NEXUS registers and invokes.
+These are the OpenClaw "Skills" (tools) that mnemochron registers and invokes.
 
 ### 8.1 Tool: Browser Extension API Bridge
 
@@ -578,7 +579,7 @@ These are the OpenClaw "Skills" (tools) that NEXUS registers and invokes.
 
 - A lightweight browser extension (Chrome/Firefox) exposes a local REST API on `http://localhost:9001`.
 - The extension tracks: tab URL, page title, scroll depth (as reading progress %), time spent on tab.
-- NEXUS polls this endpoint every 30 minutes via the heartbeat.
+- mnemochron polls this endpoint every 30 minutes via the heartbeat.
 
 **API Contract:**
 
@@ -722,13 +723,13 @@ GET /paper/{paper_id}/citations
 - Describing a newly discovered cross-thread connection
 - Extracting open questions from session notes
 
-**Prompt templates are stored in:** `~/.nexus/prompts/` as `.md` files, allowing user customization.
+**Prompt templates are stored in:** `~/.mnemochron/prompts/` as `.md` files, allowing user customization.
 
 ---
 
 ## 9. Channel / Output Layer
 
-### 9.1 Channels Used by NEXUS
+### 9.1 Channels Used by mnemochron
 
 | Channel              | Use Case                                     | Trigger                       |
 | -------------------- | -------------------------------------------- | ----------------------------- |
@@ -741,7 +742,7 @@ GET /paper/{paper_id}/citations
 ### 9.2 Notification Format — Thread Resurrection
 
 ```
-📚 NEXUS: Thread Resurface Alert
+📚 mnemochron: Thread Resurface Alert
 
 You're back on: "LLM Alignment Survey"
 (Last visited: 3 days ago)
@@ -761,7 +762,7 @@ Top 3 prior insights:
 ### 9.3 Morning Briefing Format
 
 ```
-☀️ NEXUS Morning Briefing — May 6, 2026
+☀️ mnemochron Morning Briefing — May 6, 2026
 
 ACTIVE THREADS (3)
 
@@ -910,7 +911,7 @@ All five behaviors run without user input. They are orchestrated by the HEARTBEA
 
 ## 11. Agent Reasoning Loop
 
-The Pi Engine runs NEXUS's core reasoning loop. Each behavior module is invoked within this loop.
+The Pi Engine runs mnemochron's core reasoning loop. Each behavior module is invoked within this loop.
 
 ```
 EVENT RECEIVED
@@ -971,7 +972,7 @@ EVENT RECEIVED
 
 ### 11.1 LLM Context Management
 
-Because research threads can exceed a single LLM context window, NEXUS uses OpenClaw's **Cognitive RAM** approach:
+Because research threads can exceed a single LLM context window, mnemochron uses OpenClaw's **Cognitive RAM** approach:
 
 - When calling the LLM, load ONLY the relevant thread file + last 2 session snapshots + specific insights.
 - Never load the entire memory directory into the prompt.
@@ -983,10 +984,10 @@ Because research threads can exceed a single LLM context window, NEXUS uses Open
 
 ## 12. File & Directory Structure
 
-Complete directory structure that any agent can replicate to set up NEXUS from scratch.
+Complete directory structure that any agent can replicate to set up mnemochron from scratch.
 
 ```
-nexus/
+mnemochron/
 ├── README.md                          # This file
 ├── SOUL.md                            # OpenClaw personality config
 ├── HEARTBEAT.md                       # OpenClaw proactive behavior config
@@ -1141,53 +1142,58 @@ nexus/
 
 ```bash
 # LLM Providers
-ANTHROPIC_API_KEY=sk-ant-...
-GEMINI_API_KEY=sk-...
+ANTHROPIC_API_KEY=<ANTHROPIC_API_KEY>
+GEMINI_API_KEY=<GEMINI_API_KEY>
 LLM_PRIMARY=claude                   # claude | gemini | local
 LLM_FALLBACK=gemini
 
 # Notion
-NOTION_INTEGRATION_TOKEN=secret_...
-NOTION_WORKSPACE_ID=...
+NOTION_INTEGRATION_TOKEN=<NOTION_INTEGRATION_TOKEN>
+NOTION_WORKSPACE_ID=<NOTION_WORKSPACE_ID>
 
 # Slack
-SLACK_BOT_TOKEN=xoxb-...
-SLACK_USER_ID=U...                   # DM target for briefings
+SLACK_BOT_TOKEN=<SLACK_BOT_TOKEN>
+SLACK_USER_ID=<SLACK_USER_ID>        # DM target for briefings
 
 # iMessage (AppleScript, macOS only)
-IMESSAGE_RECIPIENT=+1234567890       # Phone number or Apple ID
+IMESSAGE_RECIPIENT=<E164_PHONE_NUMBER_OR_APPLE_ID>
 
 # WhatsApp (via OpenClaw bridge)
+OPENCLAW_CLI_PATH=
+OPENCLAW_GATEWAY_PORT=18789
 WHATSAPP_ENABLED=false
+WHATSAPP_RECIPIENT=<E164_PHONE_NUMBER>
+WHATSAPP_DEFAULT_COUNTRY_CODE=
 
 # Email (optional)
 SMTP_HOST=smtp.gmail.com
 SMTP_PORT=587
-SMTP_USER=...
-SMTP_PASS=...
-EMAIL_RECIPIENTS=user@email.com
+SMTP_USER=<SMTP_USER>
+SMTP_PASS=<SMTP_PASSWORD>
+EMAIL_RECIPIENTS=<EMAIL_RECIPIENTS>
 
 # Semantic Scholar
+CORE_API_KEY=                      # Optional; leave blank for unauthenticated
 SEMANTIC_SCHOLAR_API_KEY=           # Optional; leave blank for unauthenticated
 
 # Browser Extension
 BROWSER_EXT_PORT=9001
 
-# NEXUS Config
-NEXUS_MEMORY_PATH=~/.nexus/memory
+# mnemochron Config
+MNEMOCHRON_MEMORY_PATH=~/.mnemochron/memory
 NEXUS_HEARTBEAT_INTERVAL_MIN=30
 NEXUS_MORNING_BRIEFING_TIME=08:30
 NEXUS_LIT_WATCH_TIME=06:00
 NEXUS_CONNECTION_ENGINE_TIME=23:00
 NEXUS_DORMANCY_THRESHOLD_HOURS=72
 NEXUS_LOG_LEVEL=info                 # debug | info | warn | error
-NEXUS_LOG_PATH=~/.nexus/logs/nexus.log
+MNEMOCHRON_LOG_PATH=~/.mnemochron/logs/mnemochron.log
 ```
 
 ### 14.2 `_config.yaml` — Runtime Configuration
 
 ```yaml
-# ~/.nexus/memory/_config.yaml
+# ~/.mnemochron/memory/_config.yaml
 
 user:
   name: "Researcher Name"
@@ -1260,11 +1266,11 @@ curl -fsSL https://openclaw.ai/install.sh | bash
 openclaw --version
 ```
 
-### 15.3 Clone & Install NEXUS
+### 15.3 Clone & Install mnemochron
 
 ```bash
-git clone https://github.com/your-team/nexus-openclaw.git
-cd nexus-openclaw
+git clone https://github.com/your-team/mnemochron-openclaw.git
+cd mnemochron-openclaw
 npm install
 cp .env.example .env
 # Fill in your API keys in .env
@@ -1275,7 +1281,7 @@ cp .env.example .env
 ```bash
 npm run setup
 # This runs scripts/setup.sh which:
-# 1. Creates ~/.nexus/memory/ directory structure
+# 1. Creates ~/.mnemochron/memory/ directory structure
 # 2. Writes default _index.yaml, _connections.yaml, _config.yaml
 # 3. Writes SOUL.md and HEARTBEAT.md from templates
 # 4. Prompts for initial thread creation (optional)
@@ -1294,7 +1300,7 @@ npm run setup
 # 2. Click "Load Temporary Add-on" → select ./browser-extension/manifest.json
 ```
 
-### 15.6 Start NEXUS
+### 15.6 Start mnemochron
 
 ```bash
 # Development
@@ -1411,28 +1417,28 @@ Day 8 (buffer): Connection engine + bug fixes
 
 1. Show researcher has a dormant thread "LLM Alignment Survey" (not opened in 3 days)
 2. Researcher opens an arXiv tab matching the thread
-3. NEXUS detects within the next heartbeat tick
+3. mnemochron detects within the next heartbeat tick
 4. Desktop notification fires within 60 seconds with full context brief
 5. Researcher clicks → sees where they left off, prior insights, open questions
 
 **Scenario 2 — Morning Briefing (60 seconds)**
 
 1. Show 8:30 AM trigger
-2. NEXUS composes and delivers briefing to Slack/iMessage
+2. mnemochron composes and delivers briefing to Slack/iMessage
 3. Briefing shows: 3 active threads, 2 new overnight arXiv papers, 1 new connection discovered
 
 **Scenario 3 — Live Session Snapshot (60 seconds)**
 
 1. Researcher opens 3 research tabs
 2. 30-minute heartbeat tick runs (demo with shortened 1-min tick for live demo)
-3. NEXUS writes session snapshot — show the generated markdown file
+3. mnemochron writes session snapshot — show the generated markdown file
 4. Thread `_index.yaml` updated in real-time — show diff
 
 ---
 
 ## 17. Evaluation Criteria Alignment
 
-| Criterion                                      | How NEXUS Addresses It                                                                                                                  |
+| Criterion                                      | How mnemochron Addresses It                                                                                                              |
 | ---------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
 | Working Prototype / Functionality (35%)        | Full end-to-end autonomous loop: heartbeat → snapshot → resurrection → briefing. All 5 behaviors runnable in demo.                      |
 | Technical Depth of Contribution (25%)          | Novel cross-session connection engine, semantic similarity scoring, multi-API orchestration, LLM context management strategy.           |
@@ -1446,7 +1452,7 @@ Day 8 (buffer): Connection engine + bug fixes
 
 ### 18.1 Team / Enterprise Features
 
-- **Shared thread spaces:** Multiple team members contribute to the same research thread. NEXUS surfaces connections across team members' individual sessions.
+- **Shared thread spaces:** Multiple team members contribute to the same research thread. mnemochron surfaces connections across team members' individual sessions.
 - **Conflict detection:** "You and Sarah are both researching the same framework independently — here's what she found."
 - **Knowledge graph UI:** A visual browser for the `_connections.yaml` graph, rendered as an interactive node graph.
 - **Institutional knowledge capture:** As team members leave, their threads are archived and searchable by the team.
@@ -1482,7 +1488,7 @@ Day 8 (buffer): Connection engine + bug fixes
 
 **US-001: Session Snapshot**
 
-> As a researcher, I want NEXUS to automatically capture what I'm working on every 30 minutes, so I never have to manually log my session.
+> As a researcher, I want mnemochron to automatically capture what I'm working on every 30 minutes, so I never have to manually log my session.
 
 **US-002: Thread Resurrection**
 
@@ -1494,27 +1500,27 @@ Day 8 (buffer): Connection engine + bug fixes
 
 **US-004: Connection Discovery**
 
-> As a researcher, I want NEXUS to tell me when two research threads I'm tracking are related, so I don't miss cross-domain insights.
+> As a researcher, I want mnemochron to tell me when two research threads I'm tracking are related, so I don't miss cross-domain insights.
 
 **US-005: Literature Watch**
 
-> As a researcher, I want NEXUS to monitor arXiv for new papers related to my active research threads, so I stay at the frontier without manual searching.
+> As a researcher, I want mnemochron to monitor arXiv for new papers related to my active research threads, so I stay at the frontier without manual searching.
 
-### 19.2 User Journey — First Day with NEXUS
+### 19.2 User Journey — First Day with mnemochron
 
 ```
 08:30 → Researcher receives first morning briefing (empty — no threads yet)
 09:00 → Creates first thread: "LLM Alignment Survey" with keywords
 09:05 → Opens 4 arXiv tabs to start reading
 09:35 → First heartbeat tick fires
-       → NEXUS writes session snapshot
+      → mnemochron writes session snapshot
        → Thread status: active, last_touched updated
 12:00 → Researcher closes laptop for lunch
 14:00 → Opens laptop, opens one of the same arXiv tabs
-14:01 → NEXUS detects activity on active thread (< 72h dormancy, no resurrection)
+14:01 → mnemochron detects activity on active thread (< 72h dormancy, no resurrection)
        → Snapshot captures resumed session
 20:00 → Researcher returns to different topic, opens tabs from a 4-day-old session
-20:01 → NEXUS detects dormant thread activity
+20:01 → mnemochron detects dormant thread activity
        → Desktop notification fires within 60 seconds
        → "You're back on: Distributed Systems Reading — here's where you left off"
 23:00 → Connection engine runs overnight
@@ -1550,7 +1556,7 @@ As required by hackathon rules, all AI usage in preparing this project is disclo
 | Architecture design | Claude Sonnet 4.6             | Architectural decisions, component design    |
 | Prompt templates    | Claude Sonnet 4.6             | Initial prompt engineering for LLM skills    |
 | Idea evaluation     | Claude Sonnet 4.6             | 5-persona hackathon panel evaluation         |
-| Code (planned)      | Claude Sonnet API             | LLM calls within NEXUS for summarization     |
+| Code (planned)      | Claude Sonnet API             | LLM calls within mnemochron for summarization     |
 
 All code implementation, integration testing, and demo production are done by the human team.
 
@@ -1566,7 +1572,7 @@ All code implementation, integration testing, and demo production are done by th
 | HEARTBEAT daemon      | Background process that reads HEARTBEAT.md and fires behavior triggers on a schedule.               |
 | Pi Engine             | OpenClaw's agent reasoning core; runs the plan → act → observe → update loop.                       |
 | Skill                 | A pluggable tool or behavior module in OpenClaw's execution layer.                                  |
-| Thread                | A named research topic tracked by NEXUS; has its own memory files, sources, insights, sessions.     |
+| Thread                | A named research topic tracked by mnemochron; has its own memory files, sources, insights, sessions.     |
 | Session snapshot      | A timestamped markdown file capturing the researcher's active state at a heartbeat tick.            |
 | Thread resurrection   | Behavior that detects return to a dormant thread and immediately resurfaces prior context.          |
 | Connection engine     | Nightly behavior that computes semantic similarity between threads and surfaces cross-domain links. |
@@ -1576,9 +1582,9 @@ All code implementation, integration testing, and demo production are done by th
 | \_index.yaml          | Master registry of all threads — status, timestamps, keywords, counts.                              |
 | \_connections.yaml    | Graph file recording discovered semantic connections between threads.                               |
 | Cognitive RAM         | OpenClaw's memory paging approach — loading only relevant context into the LLM window as needed.    |
-| Browser Extension API | Local REST API (port 9001) exposed by the NEXUS browser extension for tab state access.             |
+| Browser Extension API | Local REST API (port 9001) exposed by the mnemochron browser extension for tab state access.             |
 | Protocol Adapter      | OpenClaw Layer 2 component that normalizes all communication channels into a unified interface.     |
-| NEXUS                 | Neural EXperience & Understanding Synthesizer — this project.                                       |
+| mnemochron                 | Neural EXperience & Understanding Synthesizer — this project.                                       |
 
 ---
 

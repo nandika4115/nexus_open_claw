@@ -22,9 +22,9 @@ async function main(): Promise<void> {
 
   try {
     const response = await fetch("http://localhost:8080/health");
-    checks.push({ label: "NEXUS gateway", ok: response.ok });
+    checks.push({ label: "mnemochron gateway", ok: response.ok });
   } catch {
-    checks.push({ label: "NEXUS gateway", ok: false });
+    checks.push({ label: "mnemochron gateway", ok: false });
   }
 
   try {

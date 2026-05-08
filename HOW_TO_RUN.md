@@ -1,8 +1,8 @@
-# HOW TO RUN NEXUS
+# HOW TO RUN mnemochron
 
 This guide covers setup and how to run every major component:
 
-- Core NEXUS runtime (gateway + heartbeat + behaviors)
+- Core mnemochron runtime (gateway + heartbeat + behaviors)
 - Browser extension API bridge
 - Browser extension (Chrome/Firefox)
 - Health checks
@@ -48,7 +48,7 @@ npm run setup
 This creates the memory directory and the required YAML/MD files under:
 
 ```
-~/.nexus/memory
+~/.mnemochron/memory
 ```
 
 ## 4) Start the Browser API Bridge
@@ -62,7 +62,7 @@ node browser-extension/api-server.js
 Expected log:
 
 ```
-NEXUS browser API listening on http://localhost:9001
+mnemochron browser API listening on http://localhost:9001
 ```
 
 ## 5) Install the Browser Extension
@@ -80,7 +80,7 @@ NEXUS browser API listening on http://localhost:9001
 2. Click **Load Temporary Add-on**.
 3. Select `browser-extension/manifest.json`.
 
-## 6) Run the NEXUS Runtime
+## 6) Run the mnemochron Runtime
 
 If you want the OpenClaw gateway available for channel delivery and health checks, start it in a separate terminal:
 
@@ -113,7 +113,7 @@ Expected output:
 ✅ Memory layer
 ```
 
-With the real OpenClaw integration, the health check now also reports OpenClaw CLI availability and the local NEXUS gateway separately. Gateway/browser lines can fail if those processes are not running.
+With the real OpenClaw integration, the health check now also reports OpenClaw CLI availability and the local mnemochron gateway separately. Gateway/browser lines can fail if those processes are not running.
 
 ## 8) Create a Research Thread
 
@@ -137,7 +137,7 @@ Note: Jest runs in ESM mode; you may see an experimental VM modules warning.
 docker-compose up -d
 ```
 
-This runs the NEXUS runtime in a container. You still need to run:
+This runs the mnemochron runtime in a container. You still need to run:
 
 - The browser API bridge on the host
 - The browser extension in your browser

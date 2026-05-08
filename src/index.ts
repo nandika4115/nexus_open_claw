@@ -33,7 +33,7 @@ async function main(): Promise<void> {
   const config = await loadConfig();
   const logger = createLogger({ level: config.logLevel, logPath: config.logPath });
 
-  logger.info("NEXUS starting", {
+  logger.info("mnemochron starting", {
     memoryPath: config.memoryPath,
     heartbeatIntervalMin: config.heartbeatIntervalMin
   });

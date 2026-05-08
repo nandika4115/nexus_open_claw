@@ -70,13 +70,13 @@ async function main(): Promise<void> {
 
   await fs.writeFile(
     path.join(base, "SOUL.md"),
-    "# NEXUS SOUL\n\nAgent: NEXUS\nPurpose: Research continuity companion\nTone: Helpful, non-intrusive, research-aware\nPrivacy: Local-first, no data exfiltration\n",
+    "# mnemochron SOUL\n\nAgent: mnemochron\nPurpose: Research continuity companion\nTone: Helpful, non-intrusive, research-aware\nPrivacy: Local-first, no data exfiltration\n",
     "utf8"
   );
 
   await fs.writeFile(
     path.join(base, "HEARTBEAT.md"),
-    "# NEXUS HEARTBEAT Configuration\n\n## Tick Interval\nevery: 30 minutes\n\n## Behaviors\n\n### snapshot\ntrigger: tick\naction: run_session_snapshot\n\n### thread_resurrection\ntrigger: tick\ncondition: dormant_thread_activity_detected\naction: resurface_thread_context\n\n### connection_engine\ntrigger: daily at 23:00\naction: run_semantic_similarity_pass\n\n### morning_briefing\ntrigger: daily at configured_briefing_time (default 08:30)\naction: generate_morning_briefing\n\n### lit_watch\ntrigger: daily at 06:00\naction: scan_publication_feeds\n",
+    "# mnemochron HEARTBEAT Configuration\n\n## Tick Interval\nevery: 30 minutes\n\n## Behaviors\n\n### snapshot\ntrigger: tick\naction: run_session_snapshot\n\n### thread_resurrection\ntrigger: tick\ncondition: dormant_thread_activity_detected\naction: resurface_thread_context\n\n### connection_engine\ntrigger: daily at 23:00\naction: run_semantic_similarity_pass\n\n### morning_briefing\ntrigger: daily at configured_briefing_time (default 08:30)\naction: generate_morning_briefing\n\n### lit_watch\ntrigger: daily at 06:00\naction: scan_publication_feeds\n",
     "utf8"
   );
 

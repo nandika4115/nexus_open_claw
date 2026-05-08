@@ -1,8 +1,8 @@
-# NEXUS + OpenClaw Architecture
+# mnemochron + OpenClaw Architecture
 
-This project is a NEXUS research agent built around an internal NEXUS engine, with the real OpenClaw runtime available as the external gateway and channel tooling layer.
+This project is a mnemochron research agent built around an internal mnemochron engine, with the real OpenClaw runtime available as the external gateway and channel tooling layer.
 
-NEXUS handles research memory, scheduled behaviors, literature watch, thread tracking, and summaries. OpenClaw is used as the installed runtime/CLI for gateway checks and channel delivery, especially WhatsApp.
+`mnemochron` handles research memory, scheduled behaviors, literature watch, thread tracking, and summaries. OpenClaw is used as the installed runtime/CLI for gateway checks and channel delivery, especially WhatsApp.
 
 ## Startup Flow
 
@@ -24,7 +24,7 @@ the app:
 5. Creates tool clients for browser state, arXiv, CORE, Semantic Scholar, LLMs, and OpenClaw.
 6. Creates delivery channels for desktop, Slack, iMessage, WhatsApp, and email.
 7. Registers behaviors into the internal `PiEngine`.
-8. Starts the NEXUS HTTP/WebSocket gateway on port `8080`.
+8. Starts the mnemochron HTTP/WebSocket gateway on port `8080`.
 9. Starts the heartbeat daemon.
 
 ## Internal Engine
@@ -57,10 +57,10 @@ new papers are saved into sources.yaml
 
 ## Memory
 
-NEXUS stores research state locally as files. Setup creates a memory directory, usually:
+`mnemochron` stores research state locally as files. Setup creates a memory directory, usually:
 
 ```text
-~/.nexus/memory
+~/.mnemochron/memory
 ```
 
 Important memory files:
@@ -129,7 +129,7 @@ openclaw health --json
 openclaw message send --channel whatsapp ...
 ```
 
-So NEXUS can use the real OpenClaw CLI instead of only mentioning OpenClaw in documentation.
+So mnemochron can use the real OpenClaw CLI instead of only mentioning OpenClaw in documentation.
 
 The WhatsApp channel uses OpenClaw here:
 
@@ -137,7 +137,7 @@ The WhatsApp channel uses OpenClaw here:
 src/channels/whatsapp.ts
 ```
 
-If enabled, NEXUS sends WhatsApp messages through:
+If enabled, mnemochron sends WhatsApp messages through:
 
 ```powershell
 openclaw message send --channel whatsapp --target <recipient> --message <text>
@@ -156,7 +156,7 @@ It checks:
 ```text
 OpenClaw CLI
 OpenClaw gateway
-NEXUS gateway
+mnemochron gateway
 Browser extension
 Memory layer
 ```
@@ -182,7 +182,7 @@ The browser extension lives in:
 browser-extension/
 ```
 
-Its API bridge runs locally on port `9001`. NEXUS uses it to inspect browser tabs and infer what research thread may be active.
+Its API bridge runs locally on port `9001`. mnemochron uses it to inspect browser tabs and infer what research thread may be active.
 
 Start it with:
 
@@ -225,7 +225,7 @@ Start browser bridge:
 node browser-extension/api-server.js
 ```
 
-Start NEXUS:
+Start mnemochron:
 
 ```powershell
 npm start
@@ -239,4 +239,4 @@ npm run thread:create
 
 ## Summary
 
-OpenClaw is the external gateway and channel runtime. NEXUS is the research-specific brain layered on top: memory, literature discovery, session tracking, and research continuity.
+OpenClaw is the external gateway and channel runtime. mnemochron is the research-specific brain layered on top: memory, literature discovery, session tracking, and research continuity.
