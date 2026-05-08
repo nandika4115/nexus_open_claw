@@ -4,7 +4,7 @@
 
 `MNEMOCHRON` is a persistent, proactive research cognition layer built on the **OpenClaw autonomous AI agent framework**. It lives alongside a researcher's workflow — silently capturing, connecting, and resurfacing intellectual context across time, tools, and sessions. It does not wait to be asked; it thinks _with_ the user.
 
-# 🚀 Submission Assets
+#  Submission Assets
 
 <div align="center">
 
